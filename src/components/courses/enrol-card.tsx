@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { CalendarDays, Check, ExternalLink, ShieldCheck } from "lucide-react";
+import { CalendarDays, Check, ExternalLink, ShieldCheck, Zap } from "lucide-react";
+import { bootcamp, isBootcampCourse } from "@/content/bootcamps";
 import { isPlaceholder } from "@/content/site";
 import type { Course } from "@/content/types";
 import { lessonCount } from "@/content/courses";
@@ -42,6 +43,19 @@ export function EnrolCard({ course, className }: { course: Course; className?: s
           <CalendarDays aria-hidden /> Ask a question first
         </Link>
       </Button>
+
+      {isBootcampCourse(course.slug) && (
+        <Link
+          href="/courses#bootcamps"
+          className="mt-4 flex items-start gap-2.5 rounded-xl border border-brand/40 bg-brand/10 p-3 text-sm transition-colors hover:bg-brand/15"
+        >
+          <Zap aria-hidden className="mt-0.5 size-4 shrink-0 text-brand-text" />
+          <span>
+            Also runs as a {bootcamp.duration} live bootcamp for <Price price={bootcamp.price} className="font-semibold" /> every quarter.{" "}
+            <span className="font-medium text-brand-text">See dates →</span>
+          </span>
+        </Link>
+      )}
 
       <ul className="mt-6 space-y-2.5 text-sm">
         {[

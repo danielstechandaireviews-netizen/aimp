@@ -17,6 +17,7 @@ import { LearnBuildEarn } from "@/components/interactive/learn-build-earn";
 import { Marquee } from "@/components/interactive/marquee";
 import { PathQuiz } from "@/components/interactive/path-quiz";
 import { SkillTracks, type TrackData } from "@/components/interactive/skill-tracks";
+import { BootcampSection } from "@/components/sections/bootcamp-section";
 import { PartnersStrip } from "@/components/sections/partners-strip";
 import { StatsBar } from "@/components/sections/stats-bar";
 import { TestimonialsSection } from "@/components/sections/testimonials-section";
@@ -216,6 +217,8 @@ export default function HomePage() {
           </Button>
         </div>
       </section>
+
+      <BootcampSection className="pt-0" />
 
       {/* Two audiences */}
       <section className="section border-y bg-surface">

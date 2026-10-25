@@ -1,8 +1,11 @@
 import Image from "next/image";
 import { Quote } from "lucide-react";
+import * as Flags from "country-flag-icons/react/3x2";
 import type { Testimonial } from "@/content/types";
 import { cn } from "@/lib/utils";
 import { PlaceholderBadge } from "./placeholder-badge";
+
+type FlagCode = keyof typeof Flags;
 
 export function TestimonialCard({ testimonial: t, className }: { testimonial: Testimonial; className?: string }) {
   const initials = t.name
@@ -11,6 +14,7 @@ export function TestimonialCard({ testimonial: t, className }: { testimonial: Te
     .map((p) => p[0])
     .slice(0, 2)
     .join("");
+  const Flag = t.country ? Flags[t.country as FlagCode] : undefined;
 
   return (
     <figure
@@ -39,9 +43,15 @@ export function TestimonialCard({ testimonial: t, className }: { testimonial: Te
         )}
         <span className="text-sm">
           <span className="block font-semibold">{t.name}</span>
-          <span className="block text-muted-foreground">
+          <span className="flex items-center gap-1.5 text-muted-foreground">
             {t.role}
-            {t.location ? ` · ${t.location}` : ""}
+            {t.location && (
+              <>
+                <span aria-hidden>·</span>
+                {Flag && <Flag aria-hidden className="h-3 w-[18px] shrink-0 rounded-[2px] shadow-[0_0_0_1px_rgb(0_0_0/0.15)]" />}
+                {t.location}
+              </>
+            )}
           </span>
         </span>
       </figcaption>

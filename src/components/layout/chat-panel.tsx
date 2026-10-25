@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { ArrowLeft, Briefcase, ExternalLink, GraduationCap, Mail, MessageCircle, RotateCcw, Send, User, X } from "lucide-react";
+import { ArrowLeft, Briefcase, CalendarDays, ExternalLink, GraduationCap, Mail, MessageCircle, RotateCcw, Send, User, X } from "lucide-react";
 import type { Price as PriceType } from "@/content/types";
 import { Price } from "@/components/shared/price";
 
@@ -20,14 +20,15 @@ export interface ChatOffer {
   whatsappText: string;
 }
 
-type Topic = "start" | "courses" | "mentorship" | "services" | "whatsapp" | "fallback";
+type Topic = "start" | "bootcamps" | "courses" | "mentorship" | "services" | "whatsapp" | "fallback";
 
 type Message =
   | { id: number; from: "user"; text: string }
   | { id: number; from: "bot"; topic: Topic; text: string; note?: string };
 
 const intro: Record<Topic, string> = {
-  start: "Hi 👋 I'm Daniel's assistant. I can help you enrol in a course, book mentorship, get AI built for your business, or reach Daniel directly. What would you like to do?",
+  start: "Hi 👋 I'm Daniel's assistant. I can help you join a bootcamp, enrol in a course, book mentorship, get AI built for your business, or reach Daniel directly. What would you like to do?",
+  bootcamps: "Every quarter (March, June, September and December), three courses run as 1-month live bootcamps for $200. Pick your track:",
   courses: "Here are the courses. Tap “Pay on Selfany” to enrol securely, or ask Daniel a question first on WhatsApp.",
   mentorship: "Work 1-on-1 with Daniel. Pick a package and pay on Selfany, or chat on WhatsApp to find the right fit.",
   services: "Daniel builds AI software, automations and agents for small and medium businesses. Every project is quoted to fit, so the quickest way to start is a WhatsApp chat or a quote request.",
@@ -36,6 +37,7 @@ const intro: Record<Topic, string> = {
 };
 
 const menu: { topic: Topic; label: string; icon: typeof GraduationCap }[] = [
+  { topic: "bootcamps", label: "Join a $200 bootcamp", icon: CalendarDays },
   { topic: "courses", label: "Buy a course", icon: GraduationCap },
   { topic: "mentorship", label: "1-on-1 mentorship", icon: User },
   { topic: "services", label: "AI for my business", icon: Briefcase },
@@ -46,9 +48,10 @@ const menu: { topic: Topic; label: string; icon: typeof GraduationCap }[] = [
 function matchTopic(text: string): Topic {
   const t = text.toLowerCase();
   if (/whats\s?app|call|talk|speak|phone|human|daniel/.test(t)) return "whatsapp";
+  if (/bootcamp|cohort|quarter|\$?200\b/.test(t)) return "bootcamps";
   if (/mentor|coach|1.on.1|one.on.one|session|sprint|accelerator/.test(t)) return "mentorship";
   if (/business|company|quote|build (me|us)|automate my|agent for|client|hire/.test(t)) return "services";
-  if (/course|learn|enrol|enroll|class|bootcamp|n8n|rag|mcp|buy|pay|price|cost|selfany/.test(t)) return "courses";
+  if (/course|learn|enrol|enroll|class|n8n|rag|mcp|buy|pay|price|cost|selfany/.test(t)) return "courses";
   return "fallback";
 }
 
@@ -63,12 +66,14 @@ function WhatsAppGlyph({ className }: { className?: string }) {
 /** Client side of the chat assistant: guided menu, offer cards and free-text routing. */
 export function ChatPanel({
   courses,
+  bootcamps,
   mentorship,
   services,
   whatsappNumber,
   email,
 }: {
   courses: ChatOffer[];
+  bootcamps: ChatOffer[];
   mentorship: ChatOffer[];
   services: ChatOffer[];
   whatsappNumber: string;
@@ -83,7 +88,7 @@ export function ChatPanel({
   const launcherRef = useRef<HTMLButtonElement>(null);
 
   const wa = (text: string) => `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
-  const offers: Partial<Record<Topic, ChatOffer[]>> = { courses, mentorship, services };
+  const offers: Partial<Record<Topic, ChatOffer[]>> = { bootcamps, courses, mentorship, services };
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });

@@ -26,7 +26,7 @@ export const metadata = buildMetadata({
 
 export default function TrainingPage() {
   const faqs = faqGroups.find((g) => g.id === "training")!.items;
-  const trainingTestimonials = testimonials.filter((t) => ["Mentorship", "Community", "Course"].includes(t.context));
+  const trainingTestimonials = testimonials.filter((t) => !t.placeholder && ["Mentorship", "Community", "Course"].includes(t.context));
 
   return (
     <>
@@ -74,6 +74,9 @@ export default function TrainingPage() {
                 </ul>
               </div>
               <div className="mt-12">
+                {o.tracksNote && (
+                  <p className="mb-6 rounded-xl border border-brand/40 bg-brand/10 px-4 py-3 text-sm">{o.tracksNote}</p>
+                )}
                 {o.tiers.some((t) => t.price) && (
                   <div className="mb-6 flex items-center justify-end gap-3">
                     <span className="text-sm text-muted-foreground">Prices in</span>

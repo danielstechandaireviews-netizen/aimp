@@ -20,42 +20,56 @@ export const bio = {
   paragraphs: [
     "Daniel's career has taken him from Product Associate to Software Engineer, and then into data as a Data Engineer and Analyst. Today he manages projects as a Senior Business Data Analyst across banking, telecommunications and oil & gas — sectors where reliability, scale and security are non-negotiable.",
     "Along the way he mastered building AI apps, AI automations and AI agents for small and medium-sized businesses — the same three skills he now teaches. He has taught them to communities across Canada, the United States, the UK and Europe through online and virtual courses, and has helped more than 400 students globally build AI skills that translate into jobs, freelance work and businesses.",
-    "Through AIMoniPoint, Daniel trains individuals to master AI hard skills and build multiple streams of income — including offering AI services to small and medium businesses. AIMoniPoint also delivers rapid AI software, AI automation and AI agents directly to SMBs, and is growing its community across Africa, Asia, North America and beyond.",
+    "Through AIMoniPoint, Daniel trains individuals to master AI hard skills and build multiple streams of income — including offering AI services to small and medium businesses. He also built UtilityApps, a set of free productivity tools and apps, and ViralMoniPoint, which helps creators get monetised on YouTube using AI automation. AIMoniPoint also delivers rapid AI software, AI automation and AI agents directly to SMBs, and is growing its community across Africa, Asia, North America and beyond.",
   ],
 };
 
-/** Career path — years are placeholders. */
+/** Career path. */
 export const timeline = [
   {
-    year: "[Year]",
+    year: "2014 – 2015",
     title: "Product Associate",
     description: "Started in product — learning how to turn customer and business needs into products people actually use.",
   },
   {
-    year: "[Year]",
+    year: "2016 – 2019",
     title: "Software Engineer",
     description: "Moved into engineering, designing and building reliable software applications.",
   },
   {
-    year: "[Year]",
+    year: "2019 – 2022",
     title: "Data Engineer & Analyst",
     description: "Shifted into data — building pipelines and turning data into insight for decision-makers.",
   },
   {
-    year: "[Year] – today",
+    year: "2022 – today",
     title: "Senior Business Data Analyst",
     description: "Manages projects across banking, telecommunications and oil & gas.",
   },
   {
-    year: "[Year]",
+    year: "2025 – today",
     title: "Building AI for small businesses",
     description: "Mastered building AI apps, AI automations and AI agents for small and medium-sized businesses.",
   },
   {
-    year: "Today",
+    year: "2026",
     title: "AI Skill Educator, AIMoniPoint",
     description:
       "Teaching AI skills to communities across Canada, the USA, the UK and Europe through online courses — and helping more than 400 students globally build AI skills that pay.",
+  },
+];
+
+/** Other products Daniel has built. */
+export const ventures = [
+  {
+    name: "UtilityApps",
+    url: "https://utilityapps.site",
+    tagline: "Free software productivity tools and apps.",
+  },
+  {
+    name: "ViralMoniPoint",
+    url: "https://viralmonipoint.com",
+    tagline: "Helps creators get monetised on YouTube using AI automation skills.",
   },
 ];
 

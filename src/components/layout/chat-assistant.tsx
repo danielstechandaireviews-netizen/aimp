@@ -1,4 +1,5 @@
-import { courses } from "@/content/courses";
+import { bootcamp } from "@/content/bootcamps";
+import { courses, getCourse } from "@/content/courses";
 import { services } from "@/content/services";
 import { isPlaceholder, siteConfig } from "@/content/site";
 import { trainingOfferings } from "@/content/training";
@@ -28,6 +29,16 @@ export function ChatAssistant() {
     whatsappText: `Hi Daniel, I'm interested in the "${c.title}" course.`,
   }));
 
+  const bootcampOffers: ChatOffer[] = bootcamp.courses.map((b) => ({
+    id: b.slug,
+    title: `${b.track} bootcamp`,
+    subtitle: `${bootcamp.duration} · live cohort · ${getCourse(b.slug)?.title ?? ""}`,
+    price: bootcamp.price,
+    payUrl: payLink(b.purchaseUrl),
+    detailsHref: "/courses#bootcamps",
+    whatsappText: `Hi Daniel, I'd like to join the next ${b.track} bootcamp.`,
+  }));
+
   const mentorship = trainingOfferings.find((t) => t.id === "mentorship");
   const mentorshipOffers: ChatOffer[] = (mentorship?.tiers ?? []).map((t) => ({
     id: t.name,
@@ -54,6 +65,7 @@ export function ChatAssistant() {
   return (
     <ChatPanel
       courses={courseOffers}
+      bootcamps={bootcampOffers}
       mentorship={mentorshipOffers}
       services={serviceOffers}
       whatsappNumber={siteConfig.contact.whatsapp}

@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import { areas } from "@/content/areas";
 import { courses } from "@/content/courses";
 import { CourseCatalog, type CatalogItem } from "@/components/courses/course-catalog";
+import { BootcampSection } from "@/components/sections/bootcamp-section";
 import { CourseCard } from "@/components/shared/course-card";
 import { CtaBanner } from "@/components/shared/cta-banner";
 import { CurrencySwitcher } from "@/components/shared/currency-switcher";
@@ -48,6 +49,8 @@ export default function CoursesPage() {
           <CurrencySwitcher />
         </div>
       </PageHero>
+
+      <BootcampSection className="border-b" />
 
       <section className="section container-page">
         <Suspense

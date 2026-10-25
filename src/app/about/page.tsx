@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { ArrowRight, Award, CalendarDays, Mic, Presentation, Users } from "lucide-react";
-import { bio, careerIndustries, certifications, media, philosophy, skillGroups, timeline } from "@/content/about";
+import { ArrowRight, ArrowUpRight, Award, CalendarDays, Mic, Presentation, Users } from "lucide-react";
+import { bio, careerIndustries, certifications, media, philosophy, skillGroups, timeline, ventures } from "@/content/about";
 import { pillarAreas } from "@/content/areas";
 import { siteConfig } from "@/content/site";
 import { Button } from "@/components/ui/button";
@@ -74,6 +74,32 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Other products */}
+      <section className="container-page pb-16" aria-labelledby="built-title">
+        <h2 id="built-title" className="text-xl font-bold">
+          Also built by Daniel
+        </h2>
+        <ul className="mt-5 grid gap-4 sm:grid-cols-2">
+          {ventures.map((v) => (
+            <li key={v.name}>
+              <a
+                href={v.url}
+                target="_blank"
+                rel="noopener"
+                className="group flex h-full items-start justify-between gap-4 rounded-2xl border bg-card p-5 transition-colors hover:border-brand/50"
+              >
+                <span>
+                  <span className="block font-semibold">{v.name}</span>
+                  <span className="mt-1 block text-sm text-muted-foreground">{v.tagline}</span>
+                  <span className="mt-2 block text-xs text-brand-text">{v.url.replace("https://", "")}</span>
+                </span>
+                <ArrowUpRight aria-hidden className="size-5 shrink-0 text-muted-foreground transition-colors group-hover:text-brand-text" />
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+
       <StatsBar />
 
       {/* Timeline */}
@@ -82,7 +108,7 @@ export default function AboutPage() {
           id="journey-title"
           eyebrow="Journey"
           title="From product to engineering, data — and AI education"
-          description="The real-world experience behind every course. (Years are placeholders.)"
+          description="The real-world experience behind every course."
         />
         <ol className="relative mx-auto mt-14 max-w-3xl border-l border-brand/40 pl-8">
           {timeline.map((t) => (

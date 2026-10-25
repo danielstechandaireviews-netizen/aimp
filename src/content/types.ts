@@ -138,6 +138,8 @@ export interface TrainingOffering {
   summary: string;
   description: string;
   benefits: string[];
+  /** Shown above the pricing table, e.g. which skill tracks the packages cover. */
+  tracksNote?: string;
   tiers: PricingTier[];
 }
 
@@ -172,6 +174,8 @@ export interface Testimonial {
   role: string;
   location?: string;
   context: "Course" | "Mentorship" | "Community" | "Services";
+  /** ISO 3166 country code (e.g. "CA", "GB") — shows that country's flag. */
+  country?: string;
   avatar?: string;
 }
 
