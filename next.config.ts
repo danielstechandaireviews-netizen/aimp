@@ -19,10 +19,8 @@ const nextConfig: NextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
   },
-  experimental: {
-    // Inline Tailwind CSS into <head> to remove the render-blocking stylesheet request.
-    inlineCss: true,
-  },
+  // No experimental.inlineCss: inlining ~128 KB of CSS pushed the Open Graph tags so far
+  // down the HTML that WhatsApp and other link-preview crawlers never reached them.
   // MDX content is read from disk at build time; make sure it ships with
   // any server function that might need it.
   outputFileTracingIncludes: {
