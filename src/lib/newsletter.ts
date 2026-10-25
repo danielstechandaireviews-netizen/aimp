@@ -17,7 +17,7 @@ import "server-only";
 export type SubscribeResult = { ok: true } | { ok: false; error: string };
 
 export async function subscribe(email: string, firstName?: string, tag?: string): Promise<SubscribeResult> {
-  const provider = (process.env.NEWSLETTER_PROVIDER ?? "none").toLowerCase();
+  const provider = (process.env.NEWSLETTER_PROVIDER ?? "none").replace(/["'\s]/g, "").toLowerCase();
 
   try {
     if (provider === "convertkit") return await subscribeConvertKit(email, firstName);

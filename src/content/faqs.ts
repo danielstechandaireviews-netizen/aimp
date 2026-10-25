@@ -64,7 +64,7 @@ export const faqGroups: { id: string; title: string; items: FaqItem[] }[] = [
       {
         question: "Can you train our community or group?",
         answer:
-          "Yes. Daniel has taught communities across Canada, the USA, the UK and Europe online, and welcomes communities across Africa, Asia, North America and beyond. Workshops and cohorts run live online.",
+          "Yes. Community coaches and platforms anywhere in the world can license Daniel's courses to run on their own platform, branded with the community's name and backed by live Q&A sessions with Daniel. Pricing is negotiable. Live workshops and cohorts are also available.",
       },
       {
         question: "Do you offer corporate training?",

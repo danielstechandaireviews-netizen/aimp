@@ -4,8 +4,8 @@ import { Resend } from "resend";
 /**
  * Email delivery via Resend. Configure with:
  *   RESEND_API_KEY      – your Resend API key
- *   RESEND_FROM_EMAIL   – a sender on a domain verified in Resend,
- *                         e.g. "AIMoniPoint <daniel@aimonipoint.com>"
+ *   RESEND_FROM_EMAIL   – optional sender on a domain verified in Resend
+ *                         (defaults to DEFAULT_FROM)
  *   CONTACT_TO_EMAIL    – where enquiries are delivered (defaults to OWNER_INBOX)
  */
 
@@ -23,8 +23,16 @@ function escapeHtml(value: string) {
     .replace(/'/g, "&#39;");
 }
 
+/** Default sender — aimonipoint.com is verified in Resend. */
+const DEFAULT_FROM = "AIMoniPoint <daniel@aimonipoint.com>";
+
+/** Reads an env var, ignoring stray whitespace and wrapping quotes pasted into the hosting dashboard. */
+function env(name: string) {
+  return process.env[name]?.trim().replace(/^(["'])(.*)\1$/, "$2").trim() || undefined;
+}
+
 function isConfigured() {
-  return Boolean(process.env.RESEND_API_KEY && process.env.RESEND_FROM_EMAIL);
+  return Boolean(env("RESEND_API_KEY"));
 }
 
 async function send(opts: { to: string; subject: string; html: string; text: string; replyTo?: string }): Promise<SendResult> {
@@ -33,14 +41,14 @@ async function send(opts: { to: string; subject: string; html: string; text: str
       console.info(`[email:dev] Resend not configured — would send "${opts.subject}" to ${opts.to}\n${opts.text}`);
       return { ok: true };
     }
-    console.error("[email] RESEND_API_KEY / RESEND_FROM_EMAIL are not set.");
+    console.error("[email] RESEND_API_KEY is not set.");
     return { ok: false, error: "Email is not configured" };
   }
 
   try {
-    const resend = new Resend(process.env.RESEND_API_KEY);
+    const resend = new Resend(env("RESEND_API_KEY"));
     const { error } = await resend.emails.send({
-      from: process.env.RESEND_FROM_EMAIL!,
+      from: env("RESEND_FROM_EMAIL") ?? DEFAULT_FROM,
       to: opts.to,
       subject: opts.subject,
       html: opts.html,
@@ -60,7 +68,7 @@ async function send(opts: { to: string; subject: string; html: string; text: str
 
 /** Sends a form submission to the site owner as a simple table. */
 export async function sendNotification(subject: string, fields: Record<string, string | undefined>, replyTo?: string) {
-  const to = process.env.CONTACT_TO_EMAIL || OWNER_INBOX;
+  const to = env("CONTACT_TO_EMAIL") ?? OWNER_INBOX;
 
   const rows = Object.entries(fields).filter(([, v]) => v);
   const html = `

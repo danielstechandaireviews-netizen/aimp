@@ -236,7 +236,7 @@ export default function HomePage() {
                     { icon: Check, title: "Self-paced courses", text: "Video courses in all three skill tracks, $100 each.", href: "/courses", cta: "Browse courses" },
                     { icon: CalendarDays, title: "Quarterly bootcamps", text: "1-month live bootcamps for $200, every March, June, September and December.", href: "/courses#bootcamps", cta: "See bootcamp dates" },
                     { icon: User, title: "1-on-1 mentorship", text: "Work directly with Daniel, from learning AI to earning with it. $350.", href: "/training#mentorship", cta: "See mentorship" },
-                    { icon: Users, title: "Community cohorts", text: "Live online training for communities and groups, worldwide.", href: "/training#community", cta: "Bring a cohort" },
+                    { icon: Users, title: "For communities", text: "License Daniel's courses, branded for your community, with live Q&A.", href: "/training#community", cta: "Discuss a licence" },
                   ].map((c) => (
                     <div key={c.title} className="flex flex-col rounded-3xl border bg-card p-6">
                       <span className="inline-flex size-11 items-center justify-center rounded-xl bg-brand/15 text-brand-text">

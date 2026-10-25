@@ -33,7 +33,7 @@ export function PricingTable({ tiers, className }: { tiers: PricingTier[]; class
             {tier.price ? (
               <Price price={tier.price} suffix={tier.priceSuffix} />
             ) : (
-              <span className="font-display text-2xl font-bold">Custom quote</span>
+              <span className="font-display text-2xl font-bold">{tier.priceLabel ?? "Custom quote"}</span>
             )}
           </div>
           <ul className="mt-6 space-y-3 text-sm">

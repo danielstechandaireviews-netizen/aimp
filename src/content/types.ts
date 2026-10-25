@@ -121,8 +121,9 @@ export interface Service {
 export interface PricingTier {
   name: string;
   description: string;
-  /** null → "Custom quote" */
+  /** null → `priceLabel` (default "Custom quote") */
   price: Price | null;
+  priceLabel?: string;
   priceSuffix?: string;
   features: string[];
   highlighted?: boolean;
