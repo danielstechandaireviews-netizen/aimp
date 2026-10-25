@@ -1,26 +1,359 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@plugin "@tailwindcss/typography";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
+
+/* ──────────────────────────────────────────────────────────────────────
+   AIMoniPoint design tokens — "AI skills that pay"
+   Dark-first: deep indigo base, growth-green brand, gold for calls to
+   action ("income"), violet as the AI accent.
+   ────────────────────────────────────────────────────────────────────── */
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-bricolage), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  --color-brand: var(--brand);
+  --color-brand-foreground: var(--brand-foreground);
+  --color-brand-text: var(--brand-text);
+  --color-cta: var(--cta);
+  --color-cta-foreground: var(--cta-foreground);
+  --color-violet: var(--violet);
+  --color-surface: var(--surface);
+
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-success: var(--success);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+
+  --animate-marquee: marquee 45s linear infinite;
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  --animate-float: float 7s ease-in-out infinite;
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Light theme */
+:root {
+  --radius: 0.85rem;
+  --background: oklch(0.985 0.006 100);
+  --foreground: oklch(0.2 0.03 285);
+  --surface: oklch(0.96 0.012 110);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.2 0.03 285);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.2 0.03 285);
+  --primary: oklch(0.52 0.15 152);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.95 0.012 110);
+  --secondary-foreground: oklch(0.25 0.03 285);
+  --muted: oklch(0.95 0.01 110);
+  --muted-foreground: oklch(0.45 0.03 285);
+  --accent: oklch(0.94 0.04 152);
+  --accent-foreground: oklch(0.25 0.03 285);
+  --destructive: oklch(0.55 0.22 27);
+  --success: oklch(0.52 0.15 152);
+  --border: oklch(0.2 0.03 285 / 12%);
+  --input: oklch(0.2 0.03 285 / 18%);
+  --ring: oklch(0.52 0.15 152);
+
+  --brand: oklch(0.52 0.15 152); /* growth green — ~5:1 with white text */
+  --brand-foreground: oklch(0.99 0 0);
+  --brand-text: oklch(0.46 0.14 152);
+  --cta: oklch(0.85 0.16 85); /* gold */
+  --cta-foreground: oklch(0.22 0.05 70);
+  --violet: oklch(0.52 0.22 295);
+
+  --grid-line: oklch(0.2 0.03 285 / 7%);
+  --glow-brand: oklch(0.6 0.17 152 / 18%);
+  --glow-violet: oklch(0.55 0.22 295 / 12%);
+  --glow-cta: oklch(0.85 0.16 85 / 22%);
+}
+
+/* Dark theme (default) */
+.dark {
+  --background: oklch(0.15 0.028 285);
+  --foreground: oklch(0.96 0.01 285);
+  --surface: oklch(0.18 0.032 285);
+  --card: oklch(0.2 0.034 285);
+  --card-foreground: oklch(0.96 0.01 285);
+  --popover: oklch(0.2 0.034 285);
+  --popover-foreground: oklch(0.96 0.01 285);
+  --primary: oklch(0.82 0.19 150);
+  --primary-foreground: oklch(0.18 0.04 160);
+  --secondary: oklch(0.25 0.035 285);
+  --secondary-foreground: oklch(0.96 0.01 285);
+  --muted: oklch(0.24 0.032 285);
+  --muted-foreground: oklch(0.76 0.025 285);
+  --accent: oklch(0.27 0.04 285);
+  --accent-foreground: oklch(0.96 0.01 285);
+  --destructive: oklch(0.7 0.19 22);
+  --success: oklch(0.82 0.19 150);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.82 0.19 150);
+
+  --brand: oklch(0.82 0.19 150); /* vivid growth green */
+  --brand-foreground: oklch(0.18 0.04 160);
+  --brand-text: oklch(0.85 0.18 150);
+  --cta: oklch(0.85 0.16 85); /* gold */
+  --cta-foreground: oklch(0.22 0.05 70);
+  --violet: oklch(0.72 0.18 300);
+
+  --grid-line: oklch(1 0 0 / 5%);
+  --glow-brand: oklch(0.82 0.19 150 / 16%);
+  --glow-violet: oklch(0.62 0.22 300 / 22%);
+  --glow-cta: oklch(0.85 0.16 85 / 12%);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    /* Safety net against decorative glows causing sideways scroll on phones. */
+    overflow-x: clip;
+    text-rendering: optimizeLegibility;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display tracking-tight;
+  }
+  /* Balanced wrapping only on big headings: applying text-wrap globally
+     (balance/pretty) made every layout pass ~4× slower on mobile. */
+  h1,
+  h2 {
+    text-wrap: balance;
+  }
+  ::selection {
+    background: var(--brand);
+    color: var(--brand-foreground);
+  }
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+  [id] {
+    scroll-margin-top: 6rem;
+  }
+}
+
+/* ── Layout helpers ─────────────────────────────────────────────────── */
+
+@utility container-page {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 80rem;
+  padding-inline: 1rem;
+  @media (width >= 40rem) {
+    padding-inline: 1.5rem;
+  }
+  @media (width >= 64rem) {
+    padding-inline: 2rem;
+  }
+}
+
+@utility section {
+  padding-block: 4rem;
+  @media (width >= 48rem) {
+    padding-block: 6rem;
+  }
+}
+
+/* ── AI motifs ──────────────────────────────────────────────────────── */
+
+/* Faint glowing grid, faded at the edges */
+@utility bg-grid {
+  background-image:
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, #000 40%, transparent 100%);
+}
+
+/* Soft gradient mesh */
+@utility bg-mesh {
+  background-image:
+    radial-gradient(40rem 28rem at 15% 10%, var(--glow-brand), transparent 70%),
+    radial-gradient(36rem 26rem at 85% 20%, var(--glow-violet), transparent 70%),
+    radial-gradient(30rem 22rem at 60% 100%, var(--glow-cta), transparent 70%);
+}
+
+@utility text-gradient {
+  background-image: linear-gradient(100deg, var(--brand) 5%, var(--cta) 95%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+@utility glow-ring {
+  box-shadow:
+    0 0 0 1px var(--border),
+    0 20px 60px -20px var(--glow-brand);
+}
+
+/* Card hover used across course/service/project cards */
+@utility card-interactive {
+  transition:
+    transform 200ms ease,
+    border-color 200ms ease,
+    box-shadow 200ms ease;
+  &:hover {
+    transform: translateY(-2px);
+    border-color: color-mix(in oklch, var(--brand) 45%, transparent);
+    box-shadow: 0 24px 60px -30px var(--glow-brand);
+  }
+}
+
+/* Hide scrollbars on horizontal carousels while staying scrollable */
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* ── MDX / legal prose ─────────────────────────────────────────────── */
+
+@layer components {
+  .prose-site {
+    @apply prose prose-neutral dark:prose-invert max-w-none;
+    --tw-prose-links: var(--brand-text);
+    --tw-prose-invert-links: var(--brand-text);
+  }
+  .prose-site :where(h2, h3) {
+    @apply font-display;
+  }
+  .prose-site :where(a) {
+    @apply font-medium underline-offset-4;
+  }
+}
+
+/* ── Income / growth motifs ─────────────────────────────────────────── */
+
+@utility text-gradient-ai {
+  background-image: linear-gradient(100deg, var(--violet) 0%, var(--brand) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* Glowing gradient border for highlighted cards (green → gold → violet). */
+@utility gradient-border {
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    border-radius: inherit;
+    background: linear-gradient(135deg, var(--brand), var(--cta), var(--violet));
+    mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+}
+
+@utility bg-dots {
+  background-image: radial-gradient(var(--grid-line) 1.2px, transparent 1.2px);
+  background-size: 22px 22px;
+}
+
+/* Edge-faded horizontal strip for marquees */
+@utility fade-x {
+  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+}
+
+/* Progress bar used by auto-advancing tabs */
+@keyframes progress-fill {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* ── Scroll reveal (zero-JS, progressive enhancement) ──────────────── */
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: reveal-up linear both;
+      animation-timeline: view();
+      animation-range: entry calc(0% + var(--reveal-delay, 0%)) entry calc(55% + var(--reveal-delay, 0%));
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

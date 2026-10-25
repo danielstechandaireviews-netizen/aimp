@@ -1,0 +1,49 @@
+---
+title: "What Is MCP? The Model Context Protocol Explained for Developers"
+description: "A practical introduction to the Model Context Protocol — what it is, why it matters for AI agents, and how MCP servers expose tools and data."
+date: "2026-08-28"
+category: "Agentic AI"
+tags: ["MCP", "Agentic AI", "AI agents", "Developers"]
+---
+
+As AI agents become more capable, one question keeps coming up: **how do we safely connect them to real tools and data?** The Model Context Protocol (MCP) is a big part of the answer.
+
+## The problem MCP solves
+
+Before MCP, every AI application had to build its own custom integration for every tool: one for the database, one for the ticketing system, one for the file store. Each integration was different, and none of them could be reused by other AI clients.
+
+MCP standardises this. It defines a common way for AI applications (**clients**) to discover and use capabilities offered by **servers**.
+
+## The three building blocks
+
+An MCP server can expose:
+
+- **Tools** — actions the model can call, such as `search_tickets` or `create_invoice`.
+- **Resources** — data the model can read, such as documents, records or files.
+- **Prompts** — reusable prompt templates for common tasks.
+
+An MCP client — an AI assistant, an IDE or your own agent — connects to one or more servers and makes those capabilities available to the model.
+
+## Why it matters for agents
+
+For agentic AI, MCP brings three big benefits:
+
+1. **Reuse.** Build an MCP server for your CRM once, and any MCP-compatible agent or assistant can use it.
+2. **Separation of concerns.** The team that owns a system can own its MCP server, including its permissions.
+3. **Control.** Because tools are explicit and described, you can review, restrict and log exactly what an agent can do.
+
+## Security still matters
+
+MCP makes integration easier — which means it also makes mistakes easier. Good practice includes:
+
+- Giving each server the **least privilege** it needs
+- Requiring **authentication** for remote servers
+- Treating tool outputs as **untrusted input** (prompt injection is real)
+- Adding **human approval** for high-impact actions
+- **Logging** every tool call
+
+## Where to go next
+
+The best way to understand MCP is to build a small server — for example, one that exposes a read-only view of a database table — and connect it to an AI client.
+
+We build MCP servers and multi-agent systems step by step in [Multi-Agent Systems & MCP for Developers](/courses/multi-agent-systems-mcp). If you're new to agents, start with [Agentic AI: Build Autonomous AI Agents](/courses/agentic-ai-autonomous-agents).
