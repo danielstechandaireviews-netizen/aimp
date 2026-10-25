@@ -1,6 +1,6 @@
 import { Suspense } from "react";
-import { Clock, Globe2, Mail } from "lucide-react";
-import { siteConfig, isPlaceholder } from "@/content/site";
+import { Clock, Globe2, Mail, MessageCircle } from "lucide-react";
+import { siteConfig, isPlaceholder, whatsappUrl } from "@/content/site";
 import { ContactForm } from "@/components/forms/contact-form";
 import { ContactFormWithTopic } from "@/components/forms/contact-form-with-topic";
 import { CalendlyEmbed } from "@/components/shared/calendly-embed";
@@ -51,6 +51,18 @@ export default function ContactPage() {
                   Email
                 </dt>
                 <dd className="text-muted-foreground pl-7">{isPlaceholder(email) ? email : <a href={`mailto:${email}`} className="hover:text-foreground">{email}</a>}</dd>
+              </div>
+              <div>
+                <dt className="flex items-center gap-2 font-semibold">
+                  <MessageCircle aria-hidden className="size-5 shrink-0 text-brand-text" />
+                  WhatsApp
+                </dt>
+                <dd className="text-muted-foreground pl-7">
+                  <a href={whatsappUrl()} target="_blank" rel="noopener noreferrer" className="hover:text-foreground">
+                    {siteConfig.contact.whatsappDisplay}
+                  </a>{" "}
+                  — fastest way to reach Daniel
+                </dd>
               </div>
               <div>
                 <dt className="flex items-center gap-2 font-semibold">

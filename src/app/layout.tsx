@@ -6,7 +6,7 @@ import { CookieBanner } from "@/components/layout/cookie-banner";
 import { Footer } from "@/components/layout/footer";
 import { Header } from "@/components/layout/header";
 import { Providers } from "@/components/layout/providers";
-import { WhatsAppButton } from "@/components/layout/whatsapp-button";
+import { ChatAssistant } from "@/components/layout/chat-assistant";
 import { JsonLd } from "@/components/shared/json-ld";
 import { ogImageUrl, organizationJsonLd, personJsonLd } from "@/lib/seo";
 import "./globals.css";
@@ -72,7 +72,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             {children}
           </main>
           <Footer />
-          <WhatsAppButton />
+          <ChatAssistant />
           <CookieBanner />
           <Analytics />
         </Providers>

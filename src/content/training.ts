@@ -28,6 +28,7 @@ export const trainingOfferings: TrainingOffering[] = [
         priceSuffix: "/ session",
         features: ["60-minute live call", "Session recording", "Written action plan", "Follow-up resources"],
         cta: { label: "Book a session", href: "/contact?topic=mentorship" },
+        purchaseUrl: "[SELFANY_URL_MENTORSHIP_SINGLE]",
       },
       {
         name: "4-Week Sprint",
@@ -37,6 +38,7 @@ export const trainingOfferings: TrainingOffering[] = [
         features: ["4 × 60-minute sessions", "Personal roadmap", "Project & code reviews", "Async chat support"],
         highlighted: true,
         cta: { label: "Apply now", href: "/training#enquire" },
+        purchaseUrl: "[SELFANY_URL_MENTORSHIP_SPRINT]",
       },
       {
         name: "12-Week Income Accelerator",
@@ -52,6 +54,7 @@ export const trainingOfferings: TrainingOffering[] = [
           "Access to selected courses",
         ],
         cta: { label: "Apply now", href: "/training#enquire" },
+        purchaseUrl: "[SELFANY_URL_MENTORSHIP_ACCELERATOR]",
       },
     ],
   },

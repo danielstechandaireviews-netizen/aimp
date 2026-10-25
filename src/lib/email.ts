@@ -5,9 +5,12 @@ import { Resend } from "resend";
  * Email delivery via Resend. Configure with:
  *   RESEND_API_KEY      – your Resend API key
  *   RESEND_FROM_EMAIL   – a sender on a domain verified in Resend,
- *                         e.g. "AIMoniPoint <hello@aimonipoint.com>"
- *   CONTACT_TO_EMAIL    – where enquiries are delivered
+ *                         e.g. "AIMoniPoint <daniel@aimonipoint.com>"
+ *   CONTACT_TO_EMAIL    – where enquiries are delivered (defaults to OWNER_INBOX)
  */
+
+/** Inbox that receives every form submission (contact, enquiries, newsletter sign-ups). */
+const OWNER_INBOX = "danielstechandaireviews@gmail.com";
 
 export type SendResult = { ok: true } | { ok: false; error: string };
 
@@ -57,11 +60,7 @@ async function send(opts: { to: string; subject: string; html: string; text: str
 
 /** Sends a form submission to the site owner as a simple table. */
 export async function sendNotification(subject: string, fields: Record<string, string | undefined>, replyTo?: string) {
-  const to = process.env.CONTACT_TO_EMAIL ?? "";
-  if (!to && process.env.NODE_ENV === "production") {
-    console.error("[email] CONTACT_TO_EMAIL is not set.");
-    return { ok: false, error: "Email is not configured" } as SendResult;
-  }
+  const to = process.env.CONTACT_TO_EMAIL || OWNER_INBOX;
 
   const rows = Object.entries(fields).filter(([, v]) => v);
   const html = `
@@ -77,7 +76,7 @@ export async function sendNotification(subject: string, fields: Record<string, s
       </table>
     </div>`;
   const text = rows.map(([k, v]) => `${k}: ${v}`).join("\n");
-  return send({ to: to || "dev@localhost", subject: `[AIMoniPoint] ${subject}`, html, text, replyTo });
+  return send({ to, subject: `[AIMoniPoint] ${subject}`, html, text, replyTo });
 }
 
 /** Sends the lead-magnet download link to the subscriber. */

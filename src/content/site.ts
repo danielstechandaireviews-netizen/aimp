@@ -23,7 +23,10 @@ export const siteConfig = {
   },
 
   contact: {
-    email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "[CONTACT_EMAIL]",
+    email: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "daniel@aimonipoint.com",
+    /** WhatsApp in international format, digits only (Nigeria +234). */
+    whatsapp: (process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "2348037723164").replace(/\D/g, ""),
+    whatsappDisplay: "+234 803 772 3164",
     calendlyUrl: process.env.NEXT_PUBLIC_CALENDLY_URL ?? "[CALENDLY_URL]",
   },
 
@@ -49,8 +52,8 @@ export const siteConfig = {
   defaultCurrency: "USD" as Currency,
 
   features: {
-    /** Floating WhatsApp button. Also requires NEXT_PUBLIC_WHATSAPP_NUMBER. */
-    whatsappButton: true,
+    /** Floating chat assistant (pay on Selfany or chat on WhatsApp). */
+    chatWidget: true,
     whatsappMessage: "Hi Daniel, I found AIMoniPoint and I'd like to ask about…",
   },
 
@@ -61,6 +64,11 @@ export const siteConfig = {
     file: "/downloads/ai-career-roadmap.pdf",
   },
 } as const;
+
+/** wa.me link to chat with Daniel, optionally with a pre-filled message. */
+export function whatsappUrl(message: string = siteConfig.features.whatsappMessage) {
+  return `https://wa.me/${siteConfig.contact.whatsapp}?text=${encodeURIComponent(message)}`;
+}
 
 /** True when a config value is still an unfilled [PLACEHOLDER]. */
 export function isPlaceholder(value: string | undefined | null): boolean {

@@ -127,6 +127,8 @@ export interface PricingTier {
   features: string[];
   highlighted?: boolean;
   cta: { label: string; href: string };
+  /** Optional Selfany checkout link — the chat assistant offers "Pay on Selfany" when set. */
+  purchaseUrl?: string;
 }
 
 export interface TrainingOffering {

@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { Mail, MapPin } from "lucide-react";
-import { footerNav, siteConfig, isPlaceholder } from "@/content/site";
+import { Mail, MapPin, MessageCircle } from "lucide-react";
+import { footerNav, siteConfig, isPlaceholder, whatsappUrl } from "@/content/site";
 import { NewsletterForm } from "@/components/forms/newsletter-form";
 import { SocialIcons } from "@/components/shared/social-icons";
 import { CookieSettingsButton } from "./cookie-banner";
@@ -33,6 +33,12 @@ export function Footer() {
                   {email}
                 </a>
               )}
+            </p>
+            <p className="flex items-center gap-2">
+              <MessageCircle aria-hidden className="size-4 text-brand-text" />
+              <a href={whatsappUrl()} target="_blank" rel="noopener noreferrer" className="hover:text-foreground">
+                WhatsApp {siteConfig.contact.whatsappDisplay}
+              </a>
             </p>
           </div>
           <SocialIcons showPlaceholders className="mt-6" />

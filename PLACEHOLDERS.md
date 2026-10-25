@@ -8,12 +8,12 @@ Placeholder content is **clearly labelled on the live site**. Testimonials, proj
 
 ## 🔑 Environment variables (`.env.local` and Vercel)
 - [ ] `NEXT_PUBLIC_SITE_URL`: `https://aimonipoint.com`
-- [ ] `NEXT_PUBLIC_CONTACT_EMAIL`: replaces `[CONTACT_EMAIL]` in the footer, contact page and form error messages
+- [x] Contact email: daniel@aimonipoint.com (override with `NEXT_PUBLIC_CONTACT_EMAIL`)
 - [ ] `NEXT_PUBLIC_CALENDLY_URL`: replaces `[CALENDLY_URL]` (the booking embed on `/contact#book`)
-- [ ] `RESEND_API_KEY`, `RESEND_FROM_EMAIL`, `CONTACT_TO_EMAIL`: needed for forms to send email in production
+- [ ] `RESEND_API_KEY`, `RESEND_FROM_EMAIL`: needed for forms to send email in production. Submissions go to danielstechandaireviews@gmail.com (override with `CONTACT_TO_EMAIL`)
 - [ ] `NEWSLETTER_PROVIDER` and its keys (ConvertKit **or** Mailchimp), or leave it as `none`
 - [ ] `NEXT_PUBLIC_PLAUSIBLE_DOMAIN` **or** `NEXT_PUBLIC_GA_ID` (optional)
-- [ ] `NEXT_PUBLIC_WHATSAPP_NUMBER` (optional; leave empty to hide the button)
+- [x] WhatsApp: +234 803 772 3164 (override with `NEXT_PUBLIC_WHATSAPP_NUMBER`)
 
 ## 🖼️ Files in `/public`
 - [x] `public/images/daniel-makonor.jpg`: your studio portrait ✅ added (also used in social-share images)
@@ -23,7 +23,7 @@ Placeholder content is **clearly labelled on the live site**. Testimonials, proj
 
 ## ⚙️ `src/content/site.ts`
 - [ ] Social links: `[LINKEDIN_URL]`, `[YOUTUBE_URL]`, `[X_URL]`, `[INSTAGRAM_URL]`, `[GITHUB_URL]`. Set a link to `""` to hide it.
-- [ ] `storeUrl`: `[SELFANY_STORE_URL]` (your Selfany store home; optional)
+- [ ] `storeUrl`: `[SELFANY_STORE_URL]` (your Selfany store home). The chat assistant's "Pay on Selfany" buttons fall back to it when an item has no link of its own
 - [ ] `defaultCurrency`: currently `USD` (sensible for a global audience across Africa, Asia and North America)
 - [ ] `regionsServed` (where students have been taught so far) and `regionsGrowing` (where you're expanding). Both appear in the hero, footer, About, Services and Contact pages.
 - [ ] `mission`: your mission statement (shown on Home and About)
@@ -47,6 +47,7 @@ Placeholder content is **clearly labelled on the live site**. Testimonials, proj
   - [ ] `[SELFANY_COURSE_URL_N8N]`
   - [ ] `[SELFANY_COURSE_URL_AGENTIC_AI]`
   - [ ] `[SELFANY_COURSE_URL_MULTI_AGENT_MCP]`
+- [ ] Mentorship Selfany links in `src/content/training.ts` (`purchaseUrl`): `[SELFANY_URL_MENTORSHIP_SINGLE]`, `[SELFANY_URL_MENTORSHIP_SPRINT]`, `[SELFANY_URL_MENTORSHIP_ACCELERATOR]`
 - [ ] **Prices**: all are sample prices. Set CAD / USD / GBP / EUR for each course.
 - [ ] Review the curricula, durations, formats, projects, tools and FAQs for each course
 - [ ] `earnWith`: the "Ways to earn with these skills" list on each course page
@@ -90,7 +91,7 @@ For each one, set the `kind` (Client project / Student build), `service` and `se
 
 ## ⚖️ Legal pages: `src/content/legal/*.mdx`
 Have these reviewed by a qualified professional, then remove the "Placeholder template" callout.
-- [ ] `[LEGAL BUSINESS NAME]`, `[BUSINESS ADDRESS]`, `[CONTACT_EMAIL]`, `[EFFECTIVE DATE]` (all four files)
+- [ ] `[LEGAL BUSINESS NAME]`, `[BUSINESS ADDRESS]`, `[EFFECTIVE DATE]` (all four files)
 - [ ] Privacy: newsletter and analytics provider names, and retention periods (`[X] months`, `[X] years`)
 - [ ] Terms: access period, whether taxes are included, `[JURISDICTION]`
 - [ ] Refunds: every `[X] days` / `[X]%` value and the rescheduling and cohort-transfer rules. These must match your Selfany settings.
