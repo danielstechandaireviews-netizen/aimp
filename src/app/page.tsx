@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Calculator, Check, Download, MessagesSquare, User, Users } from "lucide-react";
+import { ArrowRight, CalendarDays, Calculator, Check, Download, MessagesSquare, User, Users } from "lucide-react";
 import { bio } from "@/content/about";
 import { pillarAreas } from "@/content/areas";
 import { courses, featuredCourses, getCourse } from "@/content/courses";
@@ -231,10 +231,11 @@ export default function HomePage() {
           <div className="mt-10">
             <AudienceSwitch
               learner={
-                <div className="grid gap-5 md:grid-cols-3">
+                <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
                   {[
-                    { icon: Check, title: "Online courses", text: "Self-paced and live cohort courses in all three skill tracks.", href: "/courses", cta: "Browse courses" },
-                    { icon: User, title: "1-on-1 mentorship", text: "A personal roadmap from learning AI to earning with it.", href: "/training#mentorship", cta: "See mentorship" },
+                    { icon: Check, title: "Self-paced courses", text: "Video courses in all three skill tracks, $100 each.", href: "/courses", cta: "Browse courses" },
+                    { icon: CalendarDays, title: "Quarterly bootcamps", text: "1-month live bootcamps for $200, every March, June, September and December.", href: "/courses#bootcamps", cta: "See bootcamp dates" },
+                    { icon: User, title: "1-on-1 mentorship", text: "Work directly with Daniel, from learning AI to earning with it. $350.", href: "/training#mentorship", cta: "See mentorship" },
                     { icon: Users, title: "Community cohorts", text: "Live online training for communities and groups, worldwide.", href: "/training#community", cta: "Bring a cohort" },
                   ].map((c) => (
                     <div key={c.title} className="flex flex-col rounded-3xl border bg-card p-6">

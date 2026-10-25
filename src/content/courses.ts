@@ -9,8 +9,11 @@ import type { Course } from "./types";
  * - Optional long-form "About this course" copy lives in
  *   src/content/courses/<slug>.mdx and is rendered when present.
  *
- * All prices below are SAMPLE PRICES — replace with your own.
+ * Self-paced pricing: $100 per course (SELF_PACED_PRICE). Bootcamps live in bootcamps.ts.
  */
+/** Every self-paced course costs the same, whatever the track. */
+const SELF_PACED_PRICE = { CAD: 139, USD: 100, GBP: 79, EUR: 95 };
+
 export const courses: Course[] = [
   // ─── AI Software Development ─────────────────────────────────────────
   {
@@ -22,7 +25,7 @@ export const courses: Course[] = [
     level: "Intermediate",
     formats: ["Self-paced", "Live cohort"],
     duration: "8 weeks · ~60 hours",
-    price: { CAD: 899, USD: 649, GBP: 519, EUR: 599 },
+    price: SELF_PACED_PRICE,
     purchaseUrl: "[SELFANY_COURSE_URL_AI_SOFTWARE_BOOTCAMP]",
     rating: null,
     featured: true,
@@ -136,7 +139,7 @@ export const courses: Course[] = [
     level: "Advanced",
     formats: ["Self-paced", "Live cohort"],
     duration: "6 weeks · ~40 hours",
-    price: { CAD: 749, USD: 549, GBP: 439, EUR: 509 },
+    price: SELF_PACED_PRICE,
     purchaseUrl: "[SELFANY_COURSE_URL_RAG_PRODUCTION]",
     rating: null,
     featured: true,
@@ -233,7 +236,7 @@ export const courses: Course[] = [
     level: "Beginner",
     formats: ["Self-paced", "Live cohort", "1-on-1"],
     duration: "5 weeks · ~25 hours",
-    price: { CAD: 499, USD: 369, GBP: 289, EUR: 339 },
+    price: SELF_PACED_PRICE,
     purchaseUrl: "[SELFANY_COURSE_URL_AUTOMATION_MASTERCLASS]",
     rating: null,
     featured: true,
@@ -328,7 +331,7 @@ export const courses: Course[] = [
     level: "Intermediate",
     formats: ["Self-paced", "1-on-1"],
     duration: "4 weeks · ~20 hours",
-    price: { CAD: 349, USD: 259, GBP: 209, EUR: 239 },
+    price: SELF_PACED_PRICE,
     purchaseUrl: "[SELFANY_COURSE_URL_N8N]",
     rating: null,
     featured: true,
@@ -412,7 +415,7 @@ export const courses: Course[] = [
     level: "Intermediate",
     formats: ["Self-paced", "Live cohort"],
     duration: "6 weeks · ~40 hours",
-    price: { CAD: 799, USD: 589, GBP: 469, EUR: 539 },
+    price: SELF_PACED_PRICE,
     purchaseUrl: "[SELFANY_COURSE_URL_AGENTIC_AI]",
     rating: null,
     featured: true,
@@ -501,7 +504,7 @@ export const courses: Course[] = [
     level: "Advanced",
     formats: ["Self-paced", "Live cohort"],
     duration: "5 weeks · ~32 hours",
-    price: { CAD: 799, USD: 589, GBP: 469, EUR: 539 },
+    price: SELF_PACED_PRICE,
     purchaseUrl: "[SELFANY_COURSE_URL_MULTI_AGENT_MCP]",
     rating: null,
     featured: false,

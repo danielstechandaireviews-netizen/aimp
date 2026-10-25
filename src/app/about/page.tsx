@@ -24,6 +24,21 @@ export const metadata = buildMetadata({
 
 const mediaIcons = { Podcast: Mic, Talk: Presentation, Workshop: Users } as Record<string, typeof Mic>;
 
+/** Turns venture names in the bio (UtilityApps, ViralMoniPoint) into links. */
+function linkVentures(text: string) {
+  const pattern = new RegExp(`(${ventures.map((v) => v.name).join("|")})`);
+  return text.split(pattern).map((part, i) => {
+    const venture = ventures.find((v) => v.name === part);
+    return venture ? (
+      <a key={i} href={venture.url} target="_blank" rel="noopener" className="font-medium text-brand-text underline underline-offset-4 hover:text-foreground">
+        {part}
+      </a>
+    ) : (
+      part
+    );
+  });
+}
+
 export default function AboutPage() {
   return (
     <>
@@ -69,7 +84,7 @@ export default function AboutPage() {
         <div className="space-y-5 text-lg leading-relaxed text-muted-foreground lg:col-span-7">
           <p className="text-foreground">{bio.intro}</p>
           {bio.paragraphs.map((p) => (
-            <p key={p.slice(0, 40)}>{p}</p>
+            <p key={p.slice(0, 40)}>{linkVentures(p)}</p>
           ))}
         </div>
       </section>

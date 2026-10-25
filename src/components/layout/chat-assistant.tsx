@@ -40,7 +40,8 @@ export function ChatAssistant() {
   }));
 
   const mentorship = trainingOfferings.find((t) => t.id === "mentorship");
-  const mentorshipOffers: ChatOffer[] = (mentorship?.tiers ?? []).map((t) => ({
+  // Self-paced and bootcamp tiers already have their own chat topics.
+  const mentorshipOffers: ChatOffer[] = (mentorship?.tiers ?? []).filter((t) => /mentorship/i.test(t.name)).map((t) => ({
     id: t.name,
     title: t.name,
     subtitle: t.description,
