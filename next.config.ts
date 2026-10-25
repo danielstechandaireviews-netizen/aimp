@@ -28,6 +28,7 @@ const nextConfig: NextConfig = {
     "/courses/**": ["./src/content/courses/**/*"],
     "/legal/**": ["./src/content/legal/**/*"],
     "/og": ["./src/assets/fonts/**/*", "./public/images/daniel-makonor.jpg"],
+    "/flyer": ["./src/assets/fonts/**/*", "./public/images/daniel-makonor.jpg"],
   },
   async headers() {
     return [{ source: "/(.*)", headers: securityHeaders }];
