@@ -6,13 +6,13 @@ import { useConsent } from "@/lib/consent";
 /**
  * Loads analytics only after the visitor accepts cookies.
  *   NEXT_PUBLIC_PLAUSIBLE_DOMAIN  → Plausible (e.g. "aimonipoint.com")
- *   NEXT_PUBLIC_GA_ID             → Google Analytics 4 (e.g. "G-XXXXXXX")
- * Set one (or neither). Plausible is cookieless, but is still gated here for simplicity.
+ *   NEXT_PUBLIC_GA_ID             → Google Analytics 4 (defaults to G-2D657SPMEP) Plausible is cookieless, but is still gated here for simplicity.
  */
 export function Analytics() {
   const consent = useConsent();
   const plausible = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN;
-  const gaId = process.env.NEXT_PUBLIC_GA_ID;
+  // AIMoniPoint's GA4 property; set NEXT_PUBLIC_GA_ID to "off" to disable.
+  const gaId = process.env.NEXT_PUBLIC_GA_ID?.trim() || "G-2D657SPMEP";
 
   if (consent !== "accepted") return null;
 
@@ -21,7 +21,7 @@ export function Analytics() {
       {plausible && (
         <Script defer data-domain={plausible} src="https://plausible.io/js/script.js" strategy="afterInteractive" />
       )}
-      {gaId && (
+      {gaId !== "off" && (
         <>
           <Script src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} strategy="afterInteractive" />
           <Script id="ga4-init" strategy="afterInteractive">
