@@ -1,6 +1,7 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
+import { CA, EU, GB, NG, US } from "country-flag-icons/string/3x2";
 import QRCode from "qrcode";
 import { stats } from "@/content/about";
 import { bootcamp, bootcampMonthNames, nextBootcampStart } from "@/content/bootcamps";
@@ -14,6 +15,15 @@ const portrait = readFile(join(process.cwd(), "public", "images", "daniel-makono
   .then((buf) => `data:image/jpeg;base64,${buf.toString("base64")}`)
   .catch(() => null);
 const qr = QRCode.toDataURL(siteConfig.url, { margin: 1, width: 300, color: { dark: "#100e22", light: "#ffffff" } });
+
+/** Where students have been taught, shown as flags. */
+const flags = [
+  { svg: CA, label: "Canada" },
+  { svg: US, label: "USA" },
+  { svg: GB, label: "UK" },
+  { svg: NG, label: "Nigeria" },
+  { svg: EU, label: "Europe" },
+].map((f) => ({ ...f, src: `data:image/svg+xml;base64,${Buffer.from(f.svg).toString("base64")}` }));
 
 const green = "#3ee08f";
 const gold = "#f7c948";
@@ -81,7 +91,7 @@ export async function GET() {
         </div>
 
         {/* Headline + portrait */}
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: 40, gap: 32 }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: 30, gap: 32 }}>
           <div style={{ display: "flex", flexDirection: "column", maxWidth: 640 }}>
             <div style={{ display: "flex", fontSize: 24, fontWeight: 600, letterSpacing: 3, textTransform: "uppercase", color: green }}>
               Learn AI · Build with AI · Earn with AI
@@ -108,7 +118,7 @@ export async function GET() {
         </div>
 
         {/* Offers */}
-        <div style={{ display: "flex", gap: 18, marginTop: 40 }}>
+        <div style={{ display: "flex", gap: 18, marginTop: 30 }}>
           {offers.map((o) => (
             <div
               key={o.name}
@@ -164,12 +174,31 @@ export async function GET() {
           ))}
         </div>
 
-        {/* Proof */}
-        <div style={{ display: "flex", justifyContent: "space-between", marginTop: 24, paddingBottom: 22, borderBottom: "2px solid rgba(255,255,255,0.12)", fontSize: 24, fontWeight: 600, color: muted }}>
+        {/* Proof + flags */}
+        <div style={{ display: "flex", justifyContent: "space-between", marginTop: 22, fontSize: 24, fontWeight: 600, color: muted }}>
           {proof.map((p) => (
             <span key={p} style={{ display: "flex" }}>
               {p}
             </span>
+          ))}
+        </div>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            marginTop: 16,
+            paddingBottom: 20,
+            borderBottom: "2px solid rgba(255,255,255,0.12)",
+          }}
+        >
+          <span style={{ display: "flex", fontSize: 22, fontWeight: 600, color: muted }}>Students taught in</span>
+          {flags.map((f) => (
+            <div key={f.label} style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={f.src} alt="" width={48} height={32} style={{ borderRadius: 5, border: "1px solid rgba(255,255,255,0.25)" }} />
+              <span style={{ display: "flex", fontSize: 22, fontWeight: 600, color: "#e4e2f2" }}>{f.label}</span>
+            </div>
           ))}
         </div>
 
