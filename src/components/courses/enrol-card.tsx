@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { CalendarDays, Check, ExternalLink, ShieldCheck, Zap } from "lucide-react";
-import { bootcamp, isBootcampCourse } from "@/content/bootcamps";
-import { isPlaceholder } from "@/content/site";
+import { bootcamp, currentCohort, isBootcampCourse } from "@/content/bootcamps";
+import { isPlaceholder, whatsappUrl } from "@/content/site";
 import type { Course } from "@/content/types";
 import { lessonCount } from "@/content/courses";
 import { Button } from "@/components/ui/button";
@@ -9,7 +9,7 @@ import { CurrencySwitcher } from "@/components/shared/currency-switcher";
 import { Price } from "@/components/shared/price";
 import { cn } from "@/lib/utils";
 
-/** Price + enrol call-to-action. Purchase happens on the external Selfany store. */
+/** Price + enrol call-to-action. Purchase happens on Selfany once a link is set, otherwise over WhatsApp. */
 export function EnrolCard({ course, className }: { course: Course; className?: string }) {
   const placeholder = isPlaceholder(course.purchaseUrl);
 
@@ -22,14 +22,11 @@ export function EnrolCard({ course, className }: { course: Course; className?: s
       <Price price={course.price} compareAt={course.compareAtPrice} className="mt-3 text-4xl" />
 
       {placeholder ? (
-        <>
-          <Button variant="cta" size="xl" className="mt-6 w-full" disabled aria-describedby={`${course.slug}-enrol-note`}>
-            Enrol now
-          </Button>
-          <p id={`${course.slug}-enrol-note`} className="mt-2 text-xs text-muted-foreground">
-            Checkout link not set yet — add this course&apos;s <code>purchaseUrl</code> in src/content/courses.ts.
-          </p>
-        </>
+        <Button asChild variant="cta" size="xl" className="mt-6 w-full">
+          <a href={whatsappUrl(`Hi Daniel, I'd like to enrol in "${course.title}".`)} target="_blank" rel="noopener noreferrer">
+            Enrol on WhatsApp <ExternalLink aria-hidden />
+          </a>
+        </Button>
       ) : (
         <Button asChild variant="cta" size="xl" className="mt-6 w-full">
           <a href={course.purchaseUrl} target="_blank" rel="noopener">
@@ -46,7 +43,7 @@ export function EnrolCard({ course, className }: { course: Course; className?: s
 
       {isBootcampCourse(course.slug) && (
         <Link
-          href="/courses#bootcamps"
+          href={currentCohort.path}
           className="mt-4 flex items-start gap-2.5 rounded-xl border border-brand/40 bg-brand/10 p-3 text-sm transition-colors hover:bg-brand/15"
         >
           <Zap aria-hidden className="mt-0.5 size-4 shrink-0 text-brand-text" />
@@ -73,7 +70,7 @@ export function EnrolCard({ course, className }: { course: Course; className?: s
       </ul>
       <p className="mt-6 flex items-center gap-2 border-t pt-5 text-xs text-muted-foreground">
         <ShieldCheck aria-hidden className="size-4 text-brand-text" />
-        Secure checkout. See the{" "}
+        {placeholder ? "Daniel sends payment details on WhatsApp." : "Secure checkout."} See the{" "}
         <Link href="/legal/refunds" className="underline underline-offset-2 hover:text-foreground">
           refund policy
         </Link>

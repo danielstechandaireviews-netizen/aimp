@@ -1,7 +1,7 @@
 import type { Currency } from "./types";
 
 /**
- * Global site configuration. Values in [SQUARE_BRACKETS] are placeholders —
+ * Global site configuration. Empty links are hidden until you fill them in —
  * see PLACEHOLDERS.md for the full list. Secrets never live here; they go in
  * environment variables (see .env.example).
  */
@@ -27,7 +27,7 @@ export const siteConfig = {
     /** WhatsApp in international format, digits only (Nigeria +234). */
     whatsapp: (process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "2348037723164").replace(/\D/g, ""),
     whatsappDisplay: "+234 803 772 3164",
-    calendlyUrl: process.env.NEXT_PUBLIC_CALENDLY_URL ?? "[CALENDLY_URL]",
+    calendlyUrl: process.env.NEXT_PUBLIC_CALENDLY_URL ?? "",
   },
 
   /**
@@ -39,15 +39,15 @@ export const siteConfig = {
 
   /** Leave a value empty ("") to hide that icon everywhere. */
   socials: {
-    linkedin: "[LINKEDIN_URL]",
-    youtube: "[YOUTUBE_URL]",
-    x: "[X_URL]",
-    instagram: "[INSTAGRAM_URL]",
-    github: "[GITHUB_URL]",
+    linkedin: "",
+    youtube: "",
+    x: "",
+    instagram: "",
+    github: "",
   },
 
   /** Store/checkout home — individual course links live in courses.ts */
-  storeUrl: "[SELFANY_STORE_URL]",
+  storeUrl: "",
 
   defaultCurrency: "USD" as Currency,
 

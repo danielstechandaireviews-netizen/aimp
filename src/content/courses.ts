@@ -26,7 +26,7 @@ export const courses: Course[] = [
     formats: ["Self-paced", "Live cohort"],
     duration: "8 weeks · ~60 hours",
     price: SELF_PACED_PRICE,
-    purchaseUrl: "[SELFANY_COURSE_URL_AI_SOFTWARE_BOOTCAMP]",
+    purchaseUrl: "",
     rating: null,
     featured: true,
     description:
@@ -140,7 +140,7 @@ export const courses: Course[] = [
     formats: ["Self-paced", "Live cohort"],
     duration: "6 weeks · ~40 hours",
     price: SELF_PACED_PRICE,
-    purchaseUrl: "[SELFANY_COURSE_URL_RAG_PRODUCTION]",
+    purchaseUrl: "",
     rating: null,
     featured: true,
     description:
@@ -237,7 +237,7 @@ export const courses: Course[] = [
     formats: ["Self-paced", "Live cohort", "1-on-1"],
     duration: "5 weeks · ~25 hours",
     price: SELF_PACED_PRICE,
-    purchaseUrl: "[SELFANY_COURSE_URL_AUTOMATION_MASTERCLASS]",
+    purchaseUrl: "",
     rating: null,
     featured: true,
     description:
@@ -332,7 +332,7 @@ export const courses: Course[] = [
     formats: ["Self-paced", "1-on-1"],
     duration: "4 weeks · ~20 hours",
     price: SELF_PACED_PRICE,
-    purchaseUrl: "[SELFANY_COURSE_URL_N8N]",
+    purchaseUrl: "",
     rating: null,
     featured: true,
     description:
@@ -416,7 +416,7 @@ export const courses: Course[] = [
     formats: ["Self-paced", "Live cohort"],
     duration: "6 weeks · ~40 hours",
     price: SELF_PACED_PRICE,
-    purchaseUrl: "[SELFANY_COURSE_URL_AGENTIC_AI]",
+    purchaseUrl: "",
     rating: null,
     featured: true,
     description:
@@ -505,7 +505,7 @@ export const courses: Course[] = [
     formats: ["Self-paced", "Live cohort"],
     duration: "5 weeks · ~32 hours",
     price: SELF_PACED_PRICE,
-    purchaseUrl: "[SELFANY_COURSE_URL_MULTI_AGENT_MCP]",
+    purchaseUrl: "",
     rating: null,
     featured: false,
     description:

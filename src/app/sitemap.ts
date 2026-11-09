@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { areas } from "@/content/areas";
+import { bootcampRoutes, currentCohort, registrationPath } from "@/content/bootcamps";
 import { courses } from "@/content/courses";
 import { projects } from "@/content/projects";
 import { getAllPosts, legalSlugs } from "@/lib/mdx";
@@ -16,6 +17,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     page("/", 1, "weekly"),
+    page(currentCohort.path, 0.9, "weekly"),
+    ...bootcampRoutes.map((r) => page(registrationPath(r), 0.8, "weekly")),
     page("/courses", 0.9, "weekly"),
     page("/ai-areas", 0.8),
     page("/income-streams", 0.9),

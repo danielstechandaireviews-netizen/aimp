@@ -27,7 +27,7 @@ function escapeHtml(value: string) {
 const DEFAULT_FROM = "AIMoniPoint <daniel@aimonipoint.com>";
 
 /** Reads an env var, ignoring stray whitespace and wrapping quotes pasted into the hosting dashboard. */
-function env(name: string) {
+export function env(name: string) {
   return process.env[name]?.trim().replace(/^(["'])(.*)\1$/, "$2").trim() || undefined;
 }
 
@@ -85,6 +85,24 @@ export async function sendNotification(subject: string, fields: Record<string, s
     </div>`;
   const text = rows.map(([k, v]) => `${k}: ${v}`).join("\n");
   return send({ to, subject: `[AIMoniPoint] ${subject}`, html, text, replyTo });
+}
+
+/** Confirms a cohort registration and tells the student what happens next. */
+export async function sendRegistrationConfirmation(
+  to: string,
+  firstName: string,
+  details: { track: string; cohort: string; dates: string; price: string; whatsappUrl: string },
+) {
+  const html = `
+    <div style="font-family:Inter,Arial,sans-serif;font-size:15px;color:#111;line-height:1.6">
+      <p>Hi ${escapeHtml(firstName)},</p>
+      <p>You're registered for the <strong>${escapeHtml(details.track)}</strong> route of the AIMoniPoint ${escapeHtml(details.cohort)} (${escapeHtml(details.dates)}).</p>
+      <p><strong>Next step:</strong> Daniel will message you on WhatsApp with the payment details for your ${escapeHtml(details.price)} seat. Your seat is confirmed once payment is received.</p>
+      <p><a href="${escapeHtml(details.whatsappUrl)}" style="display:inline-block;background:#3ee08f;color:#100e22;padding:10px 18px;border-radius:8px;text-decoration:none;font-weight:600">Message Daniel on WhatsApp</a></p>
+      <p>— Daniel, AIMoniPoint</p>
+    </div>`;
+  const text = `Hi ${firstName},\n\nYou're registered for the ${details.track} route of the AIMoniPoint ${details.cohort} (${details.dates}).\n\nNext step: Daniel will message you on WhatsApp with the payment details for your ${details.price} seat. Your seat is confirmed once payment is received.\n\nWhatsApp: ${details.whatsappUrl}\n\n— Daniel, AIMoniPoint`;
+  return send({ to, subject: `You're registered: ${details.track} bootcamp, ${details.cohort}`, html, text });
 }
 
 /** Sends the lead-magnet download link to the subscriber. */

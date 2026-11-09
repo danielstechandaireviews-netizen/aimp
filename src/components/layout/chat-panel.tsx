@@ -29,8 +29,8 @@ type Message =
 const intro: Record<Topic, string> = {
   start: "Hi 👋 I'm Daniel's assistant. I can help you join a bootcamp, enrol in a course, book mentorship, get AI built for your business, or reach Daniel directly. What would you like to do?",
   bootcamps: "Every quarter (March, June, September and December), three courses run as 1-month live bootcamps for $200. Pick your track:",
-  courses: "Here are the courses. Tap “Pay on Selfany” to enrol securely, or ask Daniel a question first on WhatsApp.",
-  mentorship: "Work 1-on-1 with Daniel. Pick a package and pay on Selfany, or chat on WhatsApp to find the right fit.",
+  courses: "Here are the courses. Tap an option to see the details, or ask Daniel a question first on WhatsApp.",
+  mentorship: "Work 1-on-1 with Daniel. Pick a package, or chat on WhatsApp to find the right fit.",
   services: "Daniel builds AI software, automations and agents for small and medium businesses. Every project is quoted to fit, so the quickest way to start is a WhatsApp chat or a quote request.",
   whatsapp: "Daniel usually replies on WhatsApp within a few hours. Tap below to open the chat. Your message is pre-filled.",
   fallback: "Thanks! The best person to answer that is Daniel himself. Send it to him on WhatsApp and he'll get back to you.",
@@ -145,7 +145,7 @@ export function ChatPanel({
             </span>
             <div className="min-w-0 flex-1">
               <p className="font-display text-sm font-semibold">AIMoniPoint assistant</p>
-              <p className="text-xs text-muted-foreground">Pay on Selfany · or chat with Daniel</p>
+              <p className="text-xs text-muted-foreground">Courses, bootcamps · or chat with Daniel</p>
             </div>
             <button
               type="button"

@@ -10,7 +10,7 @@ import type { Project } from "./types";
  * While `placeholder` is true the site shows a visible "Placeholder" label
  * and the page is hidden from search engines.
  */
-export const projects: Project[] = [
+const allProjects: Project[] = [
   {
     slug: "placeholder-website-ai-assistant",
     placeholder: true,
@@ -114,6 +114,9 @@ export const projects: Project[] = [
     images: [],
   },
 ];
+
+/** Only real projects reach the site. Set `placeholder: false` on an entry to publish it. */
+export const projects = allProjects.filter((p) => !p.placeholder);
 
 export const projectServices = ["AI Software", "AI Automation", "AI Agents"] as const;
 export const projectKinds = ["Client project", "Student build"] as const;

@@ -43,6 +43,8 @@ Every variable is documented in [`.env.example`](./.env.example). Put them in `.
 | `RESEND_API_KEY` | ✅ | Resend API key, for the contact, enquiry and lead-magnet emails |
 | `RESEND_FROM_EMAIL` | ✅ | Sender on a **verified** Resend domain, e.g. `AIMoniPoint <hello@aimonipoint.com>` |
 | `CONTACT_TO_EMAIL` | ✅ | Inbox that receives form submissions |
+| `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` | ✅ | Stores cohort registrations (run `supabase/cohort_registrations.sql` once) |
+| `ADMIN_PASSWORD` | ✅ | Protects the registrations dashboard at `/admin/registrations` |
 | `NEWSLETTER_PROVIDER` | – | `convertkit`, `mailchimp` or `none` (default: sign-ups are emailed to you) |
 | `CONVERTKIT_API_KEY`, `CONVERTKIT_FORM_ID` | – | Needed if the provider is `convertkit` (Kit API v4) |
 | `MAILCHIMP_API_KEY`, `MAILCHIMP_AUDIENCE_ID` | – | Needed if the provider is `mailchimp` (uses double opt-in) |
@@ -116,6 +118,9 @@ Your content in **Markdown**. Internal links like [courses](/courses) use client
 ```
 
 Reading time, the category filter, the OG image, the `BlogPosting` JSON-LD and the sitemap entry are all generated automatically. Prefix a filename with `_` (e.g. `_draft.mdx`) to keep it unpublished.
+
+### Run a new cohort
+Update `currentCohort` in `src/content/bootcamps.ts`. Registrations are stored per cohort `id`. Promo links are `/december` and `/december/<route>`; add `?ref=whatsapp` (or any tag) to see which channel each registration came from. Banners are at `/flyer/december`, with `?route=<route>` and `?format=portrait|story|landscape`.
 
 ### Your photo
 Replace `public/images/daniel-makonor.jpg` with your portrait, keeping the same filename. A portrait (about 4:5) on a dark background works best. The framing fades the bottom of the image into the page.

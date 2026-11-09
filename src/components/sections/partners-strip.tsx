@@ -1,9 +1,8 @@
 import Image from "next/image";
 import { partners } from "@/content/testimonials";
-import { PlaceholderBadge } from "@/components/shared/placeholder-badge";
 
 export function PartnersStrip() {
-  const anyPlaceholder = partners.some((p) => p.placeholder);
+  if (!partners.length) return null;
   return (
     <section aria-labelledby="partners-heading" className="border-y bg-surface py-12">
       <div className="container-page">
@@ -11,7 +10,6 @@ export function PartnersStrip() {
           <h2 id="partners-heading" className="text-sm font-semibold tracking-widest text-muted-foreground uppercase">
             Communities &amp; partners
           </h2>
-          {anyPlaceholder && <PlaceholderBadge label="Placeholder logos" />}
         </div>
         <ul className="mt-8 grid grid-cols-2 items-center gap-4 sm:grid-cols-3 lg:grid-cols-6">
           {partners.map((p, i) => {

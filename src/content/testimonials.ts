@@ -4,7 +4,7 @@ import type { Partner, Testimonial } from "./types";
  * Testimonials. Only publish genuine testimonials you have permission to use.
  * Placeholders keep `placeholder: true` (this shows a placeholder label).
  */
-export const testimonials: Testimonial[] = [
+const allTestimonials: Testimonial[] = [
   {
     placeholder: false,
     quote: "Dan, well done! Your AI course is so nice, especially the way you explain it. I so love it.",
@@ -65,7 +65,7 @@ export const testimonials: Testimonial[] = [
  * Add a logo file to /public/images/partners and set `logo`, `name`, `url`,
  * and `placeholder: false`. Only list organisations you have permission to show.
  */
-export const partners: Partner[] = [
+const allPartners: Partner[] = [
   { name: "[Community 1]", placeholder: true },
   { name: "[Community 2]", placeholder: true },
   { name: "[Partner 1]", placeholder: true },
@@ -73,3 +73,7 @@ export const partners: Partner[] = [
   { name: "[Partner 2]", placeholder: true },
   { name: "[Community 4]", placeholder: true },
 ];
+
+/** Only real, consented entries reach the site. */
+export const testimonials = allTestimonials.filter((t) => !t.placeholder);
+export const partners = allPartners.filter((p) => !p.placeholder);

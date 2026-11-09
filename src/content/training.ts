@@ -51,7 +51,7 @@ export const trainingOfferings: TrainingOffering[] = [
           "Async chat support",
         ],
         cta: { label: "Apply now", href: "/training#enquire" },
-        purchaseUrl: "[SELFANY_URL_MENTORSHIP]",
+        purchaseUrl: "",
       },
     ],
   },

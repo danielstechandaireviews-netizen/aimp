@@ -1,14 +1,17 @@
 "use server";
 
 import { z } from "zod";
-import { siteConfig } from "@/content/site";
-import { sendLeadMagnet, sendNotification } from "@/lib/email";
+import { bootcamp, currentCohort, getBootcampRoute } from "@/content/bootcamps";
+import { siteConfig, whatsappUrl } from "@/content/site";
+import { sendLeadMagnet, sendNotification, sendRegistrationConfirmation } from "@/lib/email";
 import { subscribe } from "@/lib/newsletter";
 import { HONEYPOT_FIELD, type FormState } from "@/lib/form-state";
+import { addRegistration } from "@/lib/registrations";
 import {
   contactSchema,
   leadMagnetSchema,
   newsletterSchema,
+  registrationSchema,
   serviceEnquirySchema,
   trainingEnquirySchema,
 } from "@/lib/schemas";
@@ -111,6 +114,68 @@ export async function submitTrainingEnquiry(_prev: FormState, formData: FormData
   return {
     status: "success",
     message: `Thanks, ${d.name.split(" ")[0]} — your training enquiry has been received. You'll hear back within 1–2 business days.`,
+  };
+}
+
+export async function registerForCohort(_prev: FormState, formData: FormData): Promise<FormState> {
+  if (isSpam(formData)) return { status: "success", message: "You're registered." };
+  const result = validate(registrationSchema, formData);
+  if ("error" in result) return result.error!;
+  const d = result.data;
+  const bootcampRoute = getBootcampRoute(d.route)!;
+  const firstName = d.name.split(" ")[0];
+  const chat = whatsappUrl(`Hi Daniel, I just registered for the ${currentCohort.month} ${bootcampRoute.track} bootcamp. My name is ${d.name}.`);
+
+  const saved = await addRegistration({
+    cohort: currentCohort.id,
+    route: d.route,
+    full_name: d.name,
+    email: d.email,
+    whatsapp: d.whatsapp,
+    country: d.country,
+    experience: d.experience,
+    goal: d.goal || null,
+    source: d.source || null,
+  });
+
+  if (saved.ok && saved.duplicate) {
+    return {
+      status: "success",
+      message: `${firstName}, you're already registered for ${bootcampRoute.track}. Daniel will be in touch on WhatsApp.`,
+      data: { whatsappUrl: chat },
+    };
+  }
+
+  const notified = await sendNotification(
+    `New ${currentCohort.month} registration: ${bootcampRoute.track}`,
+    {
+      Route: bootcampRoute.track,
+      Name: d.name,
+      Email: d.email,
+      WhatsApp: d.whatsapp,
+      Country: d.country,
+      Experience: d.experience,
+      Goal: d.goal,
+      Source: d.source,
+    },
+    d.email,
+  );
+  // Either copy is enough to keep the registration, so only fail when both are lost.
+  if (!saved.ok && !notified.ok) return { status: "error", message: GENERIC_ERROR, values: result.values };
+
+  const confirmed = await sendRegistrationConfirmation(d.email, firstName, {
+    track: bootcampRoute.track,
+    cohort: currentCohort.title,
+    dates: currentCohort.dates,
+    price: `$${bootcamp.price.USD} USD`,
+    whatsappUrl: chat,
+  });
+  if (!confirmed.ok) console.error("[registration] confirmation email failed:", confirmed.error);
+
+  return {
+    status: "success",
+    message: `You're registered for ${bootcampRoute.track}, ${firstName}! Daniel will message you on WhatsApp with payment details for your $${bootcamp.price.USD} USD seat.`,
+    data: { whatsappUrl: chat },
   };
 }
 

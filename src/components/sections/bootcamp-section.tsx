@@ -1,8 +1,7 @@
 import Link from "next/link";
-import { CalendarDays, ExternalLink } from "lucide-react";
-import { bootcamp, bootcampMonthNames } from "@/content/bootcamps";
+import { CalendarDays } from "lucide-react";
+import { bootcamp, bootcampMonthNames, currentCohort, registrationPath } from "@/content/bootcamps";
 import { getCourse } from "@/content/courses";
-import { isPlaceholder, siteConfig, whatsappUrl } from "@/content/site";
 import { Button } from "@/components/ui/button";
 import { Price } from "@/components/shared/price";
 import { SectionHeading } from "@/components/shared/section-heading";
@@ -34,7 +33,6 @@ export function BootcampSection({ className }: { className?: string }) {
         {bootcamp.courses.map((b) => {
           const course = getCourse(b.slug);
           if (!course) return null;
-          const payUrl = !isPlaceholder(b.purchaseUrl) ? b.purchaseUrl : !isPlaceholder(siteConfig.storeUrl) ? siteConfig.storeUrl : null;
           return (
             <li key={b.slug} className="flex flex-col rounded-2xl border bg-card p-6 sm:p-7">
               <p className="text-xs font-semibold tracking-widest text-brand-text uppercase">{b.track}</p>
@@ -44,20 +42,9 @@ export function BootcampSection({ className }: { className?: string }) {
               </p>
               <Price price={bootcamp.price} className="mt-5 text-3xl" />
               <div className="mt-6 flex flex-1 flex-col justify-end gap-3">
-                {payUrl ? (
-                  <Button asChild variant="cta" size="lg" className="w-full">
-                    <a href={payUrl} target="_blank" rel="noopener">
-                      Join the bootcamp <ExternalLink aria-hidden />
-                      <span className="sr-only">(opens secure checkout in a new tab)</span>
-                    </a>
-                  </Button>
-                ) : (
-                  <Button asChild variant="cta" size="lg" className="w-full">
-                    <a href={whatsappUrl(`Hi Daniel, I'd like to join the next ${b.track} bootcamp.`)} target="_blank" rel="noopener noreferrer">
-                      Reserve my spot on WhatsApp
-                    </a>
-                  </Button>
-                )}
+                <Button asChild variant="cta" size="lg" className="w-full">
+                  <Link href={registrationPath(b.route)}>Register for {currentCohort.month}</Link>
+                </Button>
                 <Button asChild variant="outline" size="lg" className="w-full">
                   <Link href={`/courses/${course.slug}`}>See what you&apos;ll learn</Link>
                 </Button>

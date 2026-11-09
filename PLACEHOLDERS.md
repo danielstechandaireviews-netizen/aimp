@@ -1,114 +1,36 @@
-# Placeholder checklist
+# Launch checklist
 
-Everything below must be replaced or confirmed before launch. Placeholders are written in `[SQUARE BRACKETS]` so you can also search the project for `[` to find any stragglers.
+The site no longer shows any `[BRACKET]` placeholders. Anything that needs real information from you is hidden until you add it, so nothing here blocks going live.
 
-Placeholder content is **clearly labelled on the live site**. Testimonials, projects, partner logos, certifications and media all show a visible "Placeholder" badge, and placeholder projects are kept out of search engines.
+## To turn on December registrations
+1. In Supabase, create a project, open **SQL Editor**, and run `supabase/cohort_registrations.sql`.
+2. In Vercel, add `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` and `ADMIN_PASSWORD`, then redeploy.
+3. See your students at `/admin/registrations`.
 
----
+Until the database is connected, each registration is still emailed to `CONTACT_TO_EMAIL`, but the dashboard stays empty.
 
-## 🔑 Environment variables (`.env.local` and Vercel)
-- [ ] `NEXT_PUBLIC_SITE_URL`: `https://aimonipoint.com`
-- [x] Contact email: daniel@aimonipoint.com (override with `NEXT_PUBLIC_CONTACT_EMAIL`)
-- [ ] `NEXT_PUBLIC_CALENDLY_URL`: replaces `[CALENDLY_URL]` (the booking embed on `/contact#book`)
-- [ ] `RESEND_API_KEY`, `RESEND_FROM_EMAIL`: needed for forms to send email in production. Submissions go to danielstechandaireviews@gmail.com (override with `CONTACT_TO_EMAIL`)
-- [ ] `NEWSLETTER_PROVIDER` and its keys (ConvertKit **or** Mailchimp), or leave it as `none`
-- [ ] `NEXT_PUBLIC_PLAUSIBLE_DOMAIN` **or** `NEXT_PUBLIC_GA_ID` (optional)
-- [x] WhatsApp: +234 803 772 3164 (override with `NEXT_PUBLIC_WHATSAPP_NUMBER`)
+## Hidden until you add them
+| What | Where | Shows up on |
+| --- | --- | --- |
+| Social links | `socials` in `src/content/site.ts` | Footer, About, Contact |
+| Calendly | `NEXT_PUBLIC_CALENDLY_URL` | `/contact#book` (WhatsApp booking until then) |
+| Selfany checkout links | `purchaseUrl` in `courses.ts`, `training.ts`, `bootcamps.ts`; `storeUrl` in `site.ts` | Enrol buttons (WhatsApp until then) |
+| Certifications, media | `src/content/about.ts` | About |
+| Real projects | `src/content/projects.ts`: fill in an entry, set `placeholder: false` | Home, `/projects` (course projects until then) |
+| Business testimonial | `src/content/testimonials.ts`: real, consented quote only, `placeholder: false` | Services |
+| Partner logos | `src/content/testimonials.ts`, files in `public/images/partners/` | Home |
 
-## 🖼️ Files in `/public`
-- [x] `public/images/daniel-makonor.jpg`: your studio portrait ✅ added (also used in social-share images)
-- [ ] `public/downloads/ai-career-roadmap.pdf`: the real AI Career Roadmap PDF (currently a one-page placeholder)
-- [ ] `public/images/partners/*`: partner and community logos (see Testimonials & partners below)
-- [ ] `public/images/projects/*`: case-study visuals (optional; a generated visual is used until you add them)
+## Confirm these defaults
+These were filled with standard values so the site reads complete. They are promises to your customers, so change any that don't match how you work.
 
-## ⚙️ `src/content/site.ts`
-- [ ] Social links: `[LINKEDIN_URL]`, `[YOUTUBE_URL]`, `[X_URL]`, `[INSTAGRAM_URL]`, `[GITHUB_URL]`. Set a link to `""` to hide it.
-- [ ] `storeUrl`: `[SELFANY_STORE_URL]` (your Selfany store home). The chat assistant's "Pay on Selfany" buttons fall back to it when an item has no link of its own
-- [ ] `defaultCurrency`: currently `USD` (sensible for a global audience across Africa, Asia and North America)
-- [ ] `regionsServed` (where students have been taught so far) and `regionsGrowing` (where you're expanding). Both appear in the hero, footer, About, Services and Contact pages.
-- [ ] `mission`: your mission statement (shown on Home and About)
-- [ ] `features.whatsappMessage`: the pre-filled WhatsApp text
-- [ ] Choose the final tagline (see the alternatives at the bottom)
+- **Prices:** mentorship ($350) in `training.ts`, and the service "from" prices and budget ranges in `services.ts`, are still sample prices.
+- **Refunds** (`src/content/legal/refunds.mdx`, `faqs.ts`): 14 days and under 30% of a course; live cohorts 7 days before the start, then one free transfer; mentorship 24 hours' notice, unused sessions refundable for 30 days; refunds paid in 10 business days.
+- **Course access:** as long as the course is offered.
+- **Tax:** prices exclude tax.
+- **Data retention:** enquiries and registrations 24 months, customer records 6 years.
+- **Operator and law** (`terms.mdx`, `privacy.mdx`): Daniel Makonor trading as AIMoniPoint, under Nigerian law. Add a registered business name and address if you have them.
 
-## 📊 `src/content/about.ts`
-- [x] Stats: 400+ students, 3 tracks, 4 communities, 5 countries
-- [ ] Career timeline: add the `[Year]` for each role (Product Associate → Software Engineer → Data Engineer & Analyst → Senior Business Data Analyst → AI builder → AI Skill Educator)
-- [ ] Certifications: 3 × `[Certification name]` / `[Issuer]` / `[Year]`
-- [ ] Media, speaking & podcast: 3 entries (`[Podcast episode title]`, `[Talk title]`, `[Workshop title]`, and so on). Add a `url` to make an entry clickable.
-- [ ] Skill tags: review the `skillGroups` list
-- [ ] Confirm the bio wording. Banking, telecoms and oil & gas are presented **only as your career background**, not as AIMoniPoint projects.
-- [ ] `careerIndustries`: one-line descriptions of your career industries
-
-## 🎓 `src/content/courses.ts`
-- [ ] `purchaseUrl` for each course (the "Enrol now" button stays disabled until set):
-  - [ ] `[SELFANY_COURSE_URL_AI_SOFTWARE_BOOTCAMP]`
-  - [ ] `[SELFANY_COURSE_URL_RAG_PRODUCTION]`
-  - [ ] `[SELFANY_COURSE_URL_AUTOMATION_MASTERCLASS]`
-  - [ ] `[SELFANY_COURSE_URL_N8N]`
-  - [ ] `[SELFANY_COURSE_URL_AGENTIC_AI]`
-  - [ ] `[SELFANY_COURSE_URL_MULTI_AGENT_MCP]`
-- [ ] Mentorship Selfany links in `src/content/training.ts` (`purchaseUrl`): `[SELFANY_URL_MENTORSHIP_SINGLE]`, `[SELFANY_URL_MENTORSHIP_SPRINT]`, `[SELFANY_URL_MENTORSHIP_ACCELERATOR]`
-- [ ] **Prices**: all are sample prices. Set CAD / USD / GBP / EUR for each course.
-- [ ] Review the curricula, durations, formats, projects, tools and FAQs for each course
-- [ ] `earnWith`: the "Ways to earn with these skills" list on each course page
-- [ ] `rating`: leave `null` until you have verified reviews
-- [ ] Optional long-form copy in `src/content/courses/*.mdx`
-
-## 🧑‍🏫 `src/content/training.ts`
-- [ ] Mentorship prices (Single Session, 4-Week Sprint, 12-Week Income Accelerator) are sample prices
-- [ ] Community tiers show "Custom quote". Add prices if you want them public.
-
-## 💼 `src/content/services.ts`: the three SMB services
-- [ ] `startingAt` "From" prices for Rapid AI Software, AI Automation and AI Agents are **sample prices**. Set them, or use `null` for "Custom quote".
-- [ ] Review the examples, deliverables and typical timelines
-- [ ] `budgetRanges`: adjust to your pricing
-
-## 💰 `src/content/income.ts`
-- [ ] Review the six income streams and examples
-- [ ] Calculator starting values (`defaultUnits`, `defaultPrice`, `maxPrice`) are **examples only**. Visitors change them, and the tool states it's not an earnings promise.
-
-## 📁 `src/content/projects.ts`: all 6 projects and student builds are placeholders
-For each one, set the `kind` (Client project / Student build), `service` and `sector`, replace the `[Placeholder]` title, `clientType`, `summary`, `challenge`, `solution`, `techStack`, `role` and `results`, add `images`, then set **`placeholder: false`**.
-- [ ] `placeholder-website-ai-assistant`
-- [ ] `placeholder-ecommerce-order-automation`
-- [ ] `placeholder-booking-agent`
-- [ ] `placeholder-student-invoice-automation`
-- [ ] `placeholder-student-real-estate-chatbot`
-- [ ] `placeholder-lead-qualification-agent`
-
-> Tip: give the slug a real name too (e.g. `bank-policy-assistant`). The slug becomes the URL.
-
-## 💬 `src/content/testimonials.ts`
-- [ ] 6 placeholder testimonials (`[Testimonial from student — replace…]`, `[Student name]`, `[Role / company]`, `[City, Country]`). Use **real, consented** quotes only, then set `placeholder: false`.
-- [ ] 6 placeholder partners and communities (`[Community 1]`, `[Partner 1]`, …): add the `logo`, `name` and `url`, then set `placeholder: false`. Only list organisations that have given permission.
-
-## ❓ `src/content/faqs.ts`
-- [ ] Course access period
-- [ ] Tax policy (GST/HST, VAT, sales tax)
-- [ ] Payment plans and regional pricing (for learners in Africa, Asia and elsewhere)
-- [ ] Refund window for courses
-- [ ] Mentorship rescheduling policy
-
-## ⚖️ Legal pages: `src/content/legal/*.mdx`
-Have these reviewed by a qualified professional, then remove the "Placeholder template" callout.
-- [ ] `[LEGAL BUSINESS NAME]`, `[BUSINESS ADDRESS]`, `[EFFECTIVE DATE]` (all four files)
-- [ ] Privacy: newsletter and analytics provider names, and retention periods (`[X] months`, `[X] years`)
-- [ ] Terms: access period, whether taxes are included, `[JURISDICTION]`
-- [ ] Refunds: every `[X] days` / `[X]%` value and the rescheduling and cohort-transfer rules. These must match your Selfany settings.
-- [ ] Cookies: analytics provider name
-
-## 🎁 Free resource page: `src/app/free-resources/page.tsx`
-- [ ] Update the "What's inside" bullet list to match the final PDF, then remove the placeholder note
-
-## 📰 Blog
-- [ ] Review the 3 seed posts in `src/content/blog/`. Edit them, keep them, or delete them.
-
----
+Have a qualified professional review the four files in `src/content/legal/`.
 
 ## Tagline options
-The current tagline is **"Learn AI. Build with AI. Earn with AI."** Alternatives:
-1. **"AI skills that pay — more than one way."**
-2. **"Where AI skills become multiple income streams."**
-3. **"Build, automate and earn with AI."** (maps to the three skill tracks)
-
-Change it in `src/content/site.ts` (`tagline`). The home hero headline ("Learn AI skills. Build multiple streams of income.") is in `src/components/home/hero.tsx`.
+The current tagline is **"Learn AI. Build with AI. Earn with AI."** (`tagline` in `src/content/site.ts`). Alternatives: "AI skills that pay — more than one way.", "Where AI skills become multiple income streams.", "Build, automate and earn with AI."

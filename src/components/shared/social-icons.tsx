@@ -24,34 +24,29 @@ const labels: Record<Network, string> = {
   github: "GitHub",
 };
 
-/** Social links from siteConfig. Unfilled [PLACEHOLDER] links are hidden. */
-export function SocialIcons({ className, showPlaceholders = false }: { className?: string; showPlaceholders?: boolean }) {
-  const entries = (Object.entries(siteConfig.socials) as [Network, string][]).filter(
-    ([, url]) => showPlaceholders || (url && !isPlaceholder(url)),
-  );
+/** Social links from siteConfig. Empty links are hidden. */
+export function SocialIcons({ className }: { className?: string }) {
+  const entries = (Object.entries(siteConfig.socials) as [Network, string][]).filter(([, url]) => !isPlaceholder(url));
   if (!entries.length) return null;
 
   return (
     <ul className={cn("flex flex-wrap items-center gap-2", className)}>
-      {entries.map(([network, url]) => {
-        const live = url && !isPlaceholder(url);
-        return (
-          <li key={network}>
-            <a
-              href={live ? url : "#"}
-              target={live ? "_blank" : undefined}
-              rel={live ? "noopener noreferrer" : undefined}
-              aria-label={`${labels[network]}${live ? "" : " (link coming soon)"}`}
-              title={live ? labels[network] : `${labels[network]} — add URL in src/content/site.ts`}
-              className="inline-flex size-10 items-center justify-center rounded-full border bg-foreground/5 text-muted-foreground transition-colors hover:border-brand/50 hover:text-foreground"
-            >
-              <svg viewBox="0 0 24 24" className="size-4" fill="currentColor" aria-hidden>
-                <path d={paths[network]} />
-              </svg>
-            </a>
-          </li>
-        );
-      })}
+      {entries.map(([network, url]) => (
+        <li key={network}>
+          <a
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={labels[network]}
+            title={labels[network]}
+            className="inline-flex size-10 items-center justify-center rounded-full border bg-foreground/5 text-muted-foreground transition-colors hover:border-brand/50 hover:text-foreground"
+          >
+            <svg viewBox="0 0 24 24" className="size-4" fill="currentColor" aria-hidden>
+              <path d={paths[network]} />
+            </svg>
+          </a>
+        </li>
+      ))}
     </ul>
   );
 }

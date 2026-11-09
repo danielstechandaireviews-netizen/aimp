@@ -2,21 +2,20 @@ import { projectKinds, projectServices, projects } from "@/content/projects";
 import { ProjectFilter } from "@/components/projects/project-filter";
 import { CtaBanner } from "@/components/shared/cta-banner";
 import { PageHero } from "@/components/shared/page-hero";
-import { PlaceholderBadge } from "@/components/shared/placeholder-badge";
 import { ProjectCard } from "@/components/shared/project-card";
+import { CourseBuilds } from "@/components/shared/course-builds";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
   title: "Projects & Student Builds",
   description:
-    "AI chatbots, automations and agents built for small and medium businesses — by AIMoniPoint and by students applying what they learn.",
+    "The AI chatbots, automations and agents you'll build in AIMoniPoint courses: portfolio projects small and medium businesses pay for.",
   path: "/projects",
   eyebrow: "Projects & student builds",
 });
 
 export default function ProjectsPage() {
   const cards = Object.fromEntries(projects.map((p) => [p.slug, <ProjectCard key={p.slug} project={p} />]));
-  const anyPlaceholder = projects.some((p) => p.placeholder);
 
   return (
     <>
@@ -27,23 +26,21 @@ export default function ProjectsPage() {
             Real AI tools for <span className="text-gradient">small businesses</span>
           </>
         }
-        description="AI software, automations and agents built for small and medium businesses — by AIMoniPoint and by students turning their new skills into paid work."
+        description="The AI software, automations and agents you'll build as you learn, the same kinds of tools small and medium businesses pay for."
         breadcrumbs={[{ name: "Projects", path: "/projects" }]}
-      >
-        {anyPlaceholder && (
-          <p className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
-            <PlaceholderBadge /> Projects marked as placeholders will be replaced with real projects and student builds.
-          </p>
-        )}
-      </PageHero>
+      />
 
       <section className="section container-page">
-        <ProjectFilter
-          items={projects.map((p) => ({ slug: p.slug, service: p.service, kind: p.kind }))}
-          cards={cards}
-          services={projectServices}
-          kinds={projectKinds}
-        />
+        {projects.length > 0 ? (
+          <ProjectFilter
+            items={projects.map((p) => ({ slug: p.slug, service: p.service, kind: p.kind }))}
+            cards={cards}
+            services={projectServices}
+            kinds={projectKinds}
+          />
+        ) : (
+          <CourseBuilds />
+        )}
       </section>
 
       <CtaBanner

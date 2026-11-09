@@ -52,9 +52,6 @@ export default function FreeResourcesPage() {
               </li>
             ))}
           </ul>
-          <p className="mt-8 text-sm text-muted-foreground">
-            [Placeholder — update this list to match the final contents of your roadmap PDF.]
-          </p>
         </div>
         <div className="lg:col-span-6">
           <div className="rounded-3xl border bg-card p-6 glow-ring sm:p-8">

@@ -1,7 +1,7 @@
 /**
  * Profile content for /about and the home page.
  * The bio restates facts provided by Daniel — keep them accurate.
- * Anything in [SQUARE_BRACKETS] is a placeholder.
+ * Empty lists are hidden on the site until you add entries.
  */
 
 /** Impact stats. `count` (optional) animates the number when it scrolls into view. */
@@ -118,16 +118,8 @@ export const philosophy = [
   },
 ];
 
-/** Certifications — placeholders. */
-export const certifications = [
-  { name: "[Certification name]", issuer: "[Issuer]", year: "[Year]" },
-  { name: "[Certification name]", issuer: "[Issuer]", year: "[Year]" },
-  { name: "[Certification name]", issuer: "[Issuer]", year: "[Year]" },
-];
+/** Certifications. The section appears on /about once there's at least one entry. */
+export const certifications: { name: string; issuer: string; year: string }[] = [];
 
-/** Media, speaking & podcast — placeholders. */
-export const media = [
-  { type: "Podcast", title: "[Podcast episode title]", outlet: "[Podcast name]", url: "" },
-  { type: "Talk", title: "[Talk title]", outlet: "[Event / community name]", url: "" },
-  { type: "Workshop", title: "[Workshop title]", outlet: "[Organisation]", url: "" },
-];
+/** Media, speaking & podcast (type: Podcast, Talk or Workshop). Appears once there's at least one entry. */
+export const media: { type: string; title: string; outlet: string; url: string }[] = [];

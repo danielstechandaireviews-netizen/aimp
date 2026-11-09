@@ -1,4 +1,4 @@
-import { bootcamp } from "@/content/bootcamps";
+import { bootcamp, registrationPath } from "@/content/bootcamps";
 import { courses, getCourse } from "@/content/courses";
 import { services } from "@/content/services";
 import { isPlaceholder, siteConfig } from "@/content/site";
@@ -35,7 +35,7 @@ export function ChatAssistant() {
     subtitle: `${bootcamp.duration} · live cohort · ${getCourse(b.slug)?.title ?? ""}`,
     price: bootcamp.price,
     payUrl: payLink(b.purchaseUrl),
-    detailsHref: "/courses#bootcamps",
+    detailsHref: registrationPath(b.route),
     whatsappText: `Hi Daniel, I'd like to join the next ${b.track} bootcamp.`,
   }));
 

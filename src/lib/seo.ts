@@ -14,6 +14,8 @@ interface PageMeta {
   /** Pass false to skip the "| AIMoniPoint" suffix (e.g. home page). */
   titleTemplate?: boolean;
   noIndex?: boolean;
+  /** 1200×630 image to use instead of the generated OG image. */
+  image?: string;
 }
 
 export function ogImageUrl(title: string, eyebrow?: string) {
@@ -32,8 +34,8 @@ export function buildMetadata({
   publishedTime,
   titleTemplate = true,
   noIndex,
+  image = ogImageUrl(title, eyebrow),
 }: PageMeta): Metadata {
-  const image = ogImageUrl(title, eyebrow);
   return {
     title: titleTemplate ? title : { absolute: title },
     description,

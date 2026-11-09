@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { CalendarDays, ExternalLink } from "lucide-react";
-import { siteConfig, isPlaceholder } from "@/content/site";
+import { siteConfig, isPlaceholder, whatsappUrl } from "@/content/site";
 import { Button } from "@/components/ui/button";
 import { useConsent } from "@/lib/consent";
 import { cn } from "@/lib/utils";
@@ -20,11 +20,13 @@ export function CalendlyEmbed({ className }: { className?: string }) {
     return (
       <div className={cn("flex min-h-[420px] flex-col items-center justify-center gap-3 rounded-2xl border border-dashed bg-card p-8 text-center", className)}>
         <CalendarDays aria-hidden className="size-8 text-brand-text" />
-        <p className="font-semibold">Booking calendar placeholder</p>
-        <p className="max-w-sm text-sm text-muted-foreground">
-          Set <code className="rounded bg-muted px-1">NEXT_PUBLIC_CALENDLY_URL</code> to your Calendly link (currently{" "}
-          <code className="rounded bg-muted px-1">[CALENDLY_URL]</code>) to show the live scheduler here.
-        </p>
+        <p className="font-semibold">Book your free call on WhatsApp</p>
+        <p className="max-w-sm text-sm text-muted-foreground">Send Daniel a message with a day and time that suits you, and your call will be confirmed there.</p>
+        <Button asChild variant="cta">
+          <a href={whatsappUrl("Hi Daniel, I'd like to book a free discovery call.")} target="_blank" rel="noopener noreferrer">
+            Book on WhatsApp <ExternalLink aria-hidden />
+          </a>
+        </Button>
       </div>
     );
   }

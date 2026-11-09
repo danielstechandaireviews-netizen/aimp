@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { bootcampRoutes } from "@/content/bootcamps";
 
 const name = z.string().trim().min(2, "Please enter your name").max(100);
 const email = z.email("Please enter a valid email address").trim().max(200);
@@ -30,6 +31,17 @@ export const trainingEnquirySchema = z.object({
   offering: z.string().trim().min(1, "Please choose a training type").max(100),
   groupSize: optional(50),
   message: z.string().trim().min(10, "Please tell us a little about your goals").max(5000),
+});
+
+export const registrationSchema = z.object({
+  route: z.enum(bootcampRoutes),
+  name,
+  email,
+  whatsapp: z.string().trim().regex(/^\+?[\d\s()-]{7,20}$/, "Please enter your WhatsApp number, including the country code"),
+  country: z.string().trim().min(2, "Please enter your country").max(100),
+  experience: z.string().trim().min(1, "Please choose your experience level").max(100),
+  goal: optional(1000),
+  source: z.string().regex(/^[\w-]{1,40}$/).catch(""),
 });
 
 export const newsletterSchema = z.object({

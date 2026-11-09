@@ -79,10 +79,12 @@ export default function ContactPage() {
                 <dd className="text-muted-foreground pl-7">Within 1–2 business days</dd>
               </div>
             </dl>
-            <div className="mt-6 border-t pt-6">
-              <p className="text-sm font-semibold">Follow along</p>
-              <SocialIcons showPlaceholders className="mt-3" />
-            </div>
+            {Object.values(siteConfig.socials).some((url) => !isPlaceholder(url)) && (
+              <div className="mt-6 border-t pt-6">
+                <p className="text-sm font-semibold">Follow along</p>
+                <SocialIcons className="mt-3" />
+              </div>
+            )}
           </div>
         </aside>
       </section>

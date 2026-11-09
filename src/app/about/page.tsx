@@ -8,7 +8,6 @@ import { StatsBar } from "@/components/sections/stats-bar";
 import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 import { CtaBanner } from "@/components/shared/cta-banner";
 import { NeuralPattern } from "@/components/shared/neural-pattern";
-import { PlaceholderBadge } from "@/components/shared/placeholder-badge";
 import { ProfilePhoto } from "@/components/shared/profile-photo";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { SocialIcons } from "@/components/shared/social-icons";
@@ -68,7 +67,7 @@ export default function AboutPage() {
                 </Link>
               </Button>
             </div>
-            <SocialIcons showPlaceholders className="mt-8" />
+            <SocialIcons className="mt-8" />
           </div>
           <div className="mx-auto w-full max-w-sm sm:max-w-md lg:col-span-5 lg:max-w-none">
             <ProfilePhoto priority sizes="(min-width: 1024px) 40vw, 90vw" />
@@ -234,15 +233,14 @@ export default function AboutPage() {
       </section>
 
       {/* Certifications + media */}
+      {(certifications.length > 0 || media.length > 0) && (
       <section className="section container-page grid gap-12 lg:grid-cols-2">
+        {certifications.length > 0 && (
         <div>
-          <div className="flex flex-wrap items-center gap-3">
-            <h2 className="text-2xl font-bold sm:text-3xl">Certifications</h2>
-            <PlaceholderBadge />
-          </div>
+          <h2 className="text-2xl font-bold sm:text-3xl">Certifications</h2>
           <ul className="mt-6 space-y-3">
             {certifications.map((c, i) => (
-              <li key={i} className="flex items-center gap-4 rounded-xl border border-dashed bg-card p-4">
+              <li key={i} className="flex items-center gap-4 rounded-xl border bg-card p-4">
                 <Award aria-hidden className="size-6 shrink-0 text-cta" />
                 <div>
                   <p className="font-semibold">{c.name}</p>
@@ -254,11 +252,10 @@ export default function AboutPage() {
             ))}
           </ul>
         </div>
+        )}
+        {media.length > 0 && (
         <div>
-          <div className="flex flex-wrap items-center gap-3">
-            <h2 className="text-2xl font-bold sm:text-3xl">Media, speaking &amp; podcast</h2>
-            <PlaceholderBadge />
-          </div>
+          <h2 className="text-2xl font-bold sm:text-3xl">Media, speaking &amp; podcast</h2>
           <ul className="mt-6 space-y-3">
             {media.map((m, i) => {
               const Icon = mediaIcons[m.type] ?? Mic;
@@ -279,7 +276,7 @@ export default function AboutPage() {
                       {body}
                     </a>
                   ) : (
-                    <div className="flex items-center gap-4 rounded-xl border border-dashed bg-card p-4">{body}</div>
+                    <div className="flex items-center gap-4 rounded-xl border bg-card p-4">{body}</div>
                   )}
                 </li>
               );
@@ -293,7 +290,9 @@ export default function AboutPage() {
             .
           </p>
         </div>
+        )}
       </section>
+      )}
 
       <CtaBanner
         title="Let's map your AI income path"

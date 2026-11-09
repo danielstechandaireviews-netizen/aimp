@@ -28,6 +28,7 @@ import { FaqAccordion } from "@/components/shared/faq-accordion";
 import { Price } from "@/components/shared/price";
 import { ProfilePhoto } from "@/components/shared/profile-photo";
 import { ProjectCard } from "@/components/shared/project-card";
+import { CourseBuilds } from "@/components/shared/course-builds";
 import { Reveal } from "@/components/shared/reveal";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { icons } from "@/lib/icons";
@@ -331,13 +332,17 @@ export default function HomePage() {
               All projects <ArrowRight aria-hidden className="size-4" />
             </Link>
           </div>
-          <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {projects.slice(0, 3).map((p, i) => (
-              <Reveal key={p.slug} delay={i * 0.06} className="h-full">
-                <ProjectCard project={p} />
-              </Reveal>
-            ))}
-          </div>
+          {projects.length > 0 ? (
+            <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {projects.slice(0, 3).map((p, i) => (
+                <Reveal key={p.slug} delay={i * 0.06} className="h-full">
+                  <ProjectCard project={p} />
+                </Reveal>
+              ))}
+            </div>
+          ) : (
+            <CourseBuilds limit={3} className="mt-12" />
+          )}
         </div>
       </section>
 

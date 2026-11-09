@@ -41,7 +41,7 @@ export function Footer() {
               </a>
             </p>
           </div>
-          <SocialIcons showPlaceholders className="mt-6" />
+          <SocialIcons className="mt-6" />
         </div>
 
         <div className="grid grid-cols-2 gap-8 sm:grid-cols-4 lg:col-span-8">

@@ -13,6 +13,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetDescription, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { PromoBar } from "@/components/december/promo-bar";
 import { CurrencySwitcher } from "@/components/shared/currency-switcher";
 import { Logo } from "./logo";
 import { ThemeToggle } from "./theme-toggle";
@@ -84,6 +85,7 @@ export function SiteHeader({ data }: { data: MegaMenuData }) {
       >
         Skip to content
       </a>
+      <PromoBar />
       <div className="container-page flex h-16 items-center justify-between gap-4 md:h-18">
         <Logo />
 

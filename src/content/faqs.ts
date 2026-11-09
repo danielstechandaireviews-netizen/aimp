@@ -48,7 +48,7 @@ export const faqGroups: { id: string; title: string; items: FaqItem[] }[] = [
       },
       {
         question: "How long do I have access to a course?",
-        answer: "[Access period — e.g. access for as long as the course is offered, including updates. Replace with your actual policy.]",
+        answer: "You keep access for as long as the course is offered, including any updates.",
       },
     ],
   },
@@ -110,15 +110,15 @@ export const faqGroups: { id: string; title: string; items: FaqItem[] }[] = [
       },
       {
         question: "How do I pay for a course?",
-        answer: "Course enrolment is handled securely through our course store. Click 'Enrol now' on any course page to check out.",
+        answer: "Click 'Enrol' on any course page. Where online checkout isn't available, Daniel sends you secure payment details on WhatsApp.",
       },
       {
         question: "Do prices include tax?",
-        answer: "[Tax policy — e.g. whether GST/HST, VAT or sales tax is added at checkout. Replace with your actual policy.]",
+        answer: "Prices don't include tax. If sales tax, VAT or GST applies where you live, it may be added when you pay.",
       },
       {
         question: "Do you offer payment plans or regional pricing?",
-        answer: "[Payment plan / regional pricing policy — replace.] For group and community pricing, please get in touch.",
+        answer: "Message Daniel on WhatsApp to ask what's available for your situation. For group and community pricing, please get in touch.",
       },
     ],
   },
@@ -128,11 +128,11 @@ export const faqGroups: { id: string; title: string; items: FaqItem[] }[] = [
     items: [
       {
         question: "What is your refund policy for courses?",
-        answer: "[Refund window — e.g. 14 days with less than X% of content completed. Replace.] See the full Refund Policy for details.",
+        answer: "You can request a full refund within 14 days of purchase, provided you've completed less than 30% of the course. See the full Refund Policy for details.",
       },
       {
         question: "Can I cancel or reschedule a mentorship session?",
-        answer: "[Rescheduling policy — e.g. free rescheduling with 24 hours' notice. Replace.]",
+        answer: "Yes. You can reschedule for free with at least 24 hours' notice.",
       },
     ],
   },
